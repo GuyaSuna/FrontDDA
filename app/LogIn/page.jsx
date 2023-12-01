@@ -1,6 +1,7 @@
 // loginPage.js
 
 import React from 'react';
+import Link from 'next/link';
 
 function LoginPage() {
   return (
@@ -9,26 +10,26 @@ function LoginPage() {
         <h1 className="text-3xl font-bold mb-4">Login</h1>
         <form>
           <div className="mb-6">
-            <label htmlFor="username" className="block text-sm font-medium text-gray-600">
+            <label htmlFor="username" className="block text-sm font-medium text-gray-600 mb-2">
               Usuario
             </label>
             <input
               type="text"
               id="username"
               name="username"
-              className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+              className="mt-1 p-2 w-full border-b-2 border-blue-500 focus:outline-none focus:border-blue-700"
             />
           </div>
 
           <div className="mb-6">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-600">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-600 mb-2">
               Contraseña
             </label>
             <input
               type="password"
               id="password"
               name="password"
-              className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+              className="mt-1 p-2 w-full border-b-2 border-green-500 focus:outline-none focus:border-green-700"
             />
           </div>
 
@@ -37,6 +38,13 @@ function LoginPage() {
             className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
           >
             Iniciar Sesión
+          </button>
+
+          <button
+            type="submit"
+            className="bg-blue-500 ml-10 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
+          >
+            Registrarse
           </button>
         </form>
       </div>
