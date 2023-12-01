@@ -1,7 +1,13 @@
 import Scss from '../../Styles/loginScss.scss'
 
 
-const loginPage(){
+const loginPage = () =>{(
+    <>
+        <div>
+            Hola mundo
+        </div>
+    </>
+)
     
 }
 
