@@ -1,6 +1,6 @@
 // loginPage.js
 
-import React from 'react';
+import React from "react";
 
 function LoginPage() {
   return (
@@ -9,7 +9,10 @@ function LoginPage() {
         <h1 className="text-3xl font-bold mb-4">Login</h1>
         <form>
           <div className="mb-6">
-            <label htmlFor="username" className="block text-sm font-medium text-gray-600">
+            <label
+              htmlFor="username"
+              className="block text-sm font-medium text-gray-600"
+            >
               Usuario
             </label>
             <input
@@ -21,7 +24,10 @@ function LoginPage() {
           </div>
 
           <div className="mb-6">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-600">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-600"
+            >
               Contraseña
             </label>
             <input
