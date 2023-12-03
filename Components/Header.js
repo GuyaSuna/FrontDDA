@@ -3,16 +3,12 @@ import React from "react";
 
 const Header = () => {
   return (
-    <div className="fixed-t w-full flex items-center justify-between h-20 text-black z-10  bg-blue-800 dark:bg-gray-800">
+    <div className="fixed-t w-full flex items-center justify-end h-20 text-black z-10  bg-blue-800 dark:bg-gray-800 border-b-4  dark:border-gray-600">
       <div className="flex items-center justify-start md:justify-center pl-3 w-14 md:w-64 h-14 bg-blue-800 dark:bg-gray-800 border-none">
-        <img
-          className="w-14 h-14 md:w-14 md:h-14 mr-2 rounded-full overflow-hidden"
-          src="https://media.licdn.com/dms/image/D4D03AQFXnf7PSVORQA/profile-displayphoto-shrink_200_200/0/1693490764387?e=1706745600&v=beta&t=9k1V4te9mrVyGb7Nz7mqjHjv-DFoos98wEUtRh-xJps"
-        />
-        <span className="hidden md:block text-white">ADMIN</span>
+       
       </div>
       <div className="flex justify-between items-center h-14 bg-blue-800 dark:bg-gray-800 header-right">
-        <div className="bg-white rounded flex items-center w-full max-w-xl mr-4 p-2 shadow-sm border border-gray-200">
+        <div className="bg-white rounded flex items-center w-full max-w-xs mr-4 p-2 shadow-sm border border-gray-200">
           <button className="outline-none focus:outline-none">
             <svg
               className="w-5 text-gray-600 h-5 cursor-pointer"
@@ -30,7 +26,7 @@ const Header = () => {
             type="search"
             name
             id
-            placeholder="Search"
+            placeholder="Buscar"
             className="w-full pl-3 text-sm text-black outline-none focus:outline-none bg-transparent"
           />
         </div>
