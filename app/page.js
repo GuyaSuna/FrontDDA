@@ -1,7 +1,8 @@
 "use client";
-import { useRouter } from "next/router";
-import "./LogIn/page";
+import { useRouter } from "next/navigation";
+
 import Link from "next/link";
+
 function Home() {
   const links = [
     {
