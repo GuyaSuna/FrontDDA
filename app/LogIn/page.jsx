@@ -19,7 +19,7 @@ function LoginPage() {
               type="text"
               id="username"
               name="username"
-              className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+              className="mt-1 p-2 w-full border-b-2 border-blue-500 focus:outline-none focus:border-blue-700"
             />
           </div>
 
@@ -34,7 +34,7 @@ function LoginPage() {
               type="password"
               id="password"
               name="password"
-              className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+              className="mt-1 p-2 w-full border-b-2 border-green-500 focus:outline-none focus:border-green-700"
             />
           </div>
 
@@ -43,6 +43,13 @@ function LoginPage() {
             className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
           >
             Iniciar Sesión
+          </button>
+
+          <button
+            type="submit"
+            className="bg-blue-500 ml-10 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
+          >
+            Registrarse
           </button>
         </form>
       </div>
