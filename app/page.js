@@ -14,6 +14,10 @@ function Home() {
       route: "./Clientes",
     },
     {
+      label: "Productos",
+      route: "./Productos",
+    },
+    {
       label: "Home",
       route: "/",
     },
