@@ -4,10 +4,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen bg-blue-900 dark:bg-gray-900 text-gray-800 sm:flex-row">
-      <div className="sidebar  transform transition-transform duration-150 ease-in  md:shadow-md md:translate-x-0  bg-blue-900 dark:bg-gray-900 text-white w-1/4 ">
-        <Sidebar />
-      </div>
+    
       <div className="display-flex min-h-screen w-full flex-col items-center justify-between  bg-slate-800">
         {/* Statistics Cards */}
         <CardsStatistics/> 
@@ -440,6 +437,5 @@ export default function Home() {
         </div>
         {/* ./Task Summaries */}
       </div>
-    </div>
   );
 }
