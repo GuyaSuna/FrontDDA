@@ -1,5 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
+import RootLayout from "./layout";
 
 import Link from "next/link";
 
