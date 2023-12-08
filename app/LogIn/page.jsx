@@ -2,10 +2,10 @@
 
 import React, { useState } from "react";
 import { logIn } from "../../Api/api";
-import { useRouter } from "next/navigation";
+
 
 function LoginPage() {
-  const router = useRouter();
+ 
 
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");

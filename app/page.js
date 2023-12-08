@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import RootLayout from "./layout";
 import CardsStatistics from"@/Components/CardsStatistics";
-import Link from "next/link";
+
 
 function Home() {
   

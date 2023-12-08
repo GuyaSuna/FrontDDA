@@ -1,10 +1,20 @@
+"use client";
 import React from "react";
 
 const Header = () => {
+  const links = [
+  {
+    label: "LogIn",
+    route: "./LogIn",
+  },
+  {
+    label: "LogIn",
+    route: "./LogIn",
+  },
+  ];
   return (
     <div className="fixed-t w-full flex items-center justify-between h-20 text-black z-10  bg-blue-800 dark:bg-gray-800 border-b-4  dark:border-gray-600">
       <div className="flex items-center justify-between md:justify-center pl-3 w-14 md:w-64 h-14 bg-blue-800 dark:bg-gray-800 border-none">
-        
       </div>
       <div className="flex justify-between items-center h-14 bg-blue-800 dark:bg-gray-800 header-right">
         <div className="bg-white rounded flex items-center w-full max-w-xs m-12 p-2 shadow-sm border border-gray-200">
@@ -35,7 +45,7 @@ const Header = () => {
           </li>
           <li>
             <a
-              href="#"
+              href="/LogIn"
               className="flex items-center mr-4 text-white hover:text-black"
             >
               <span className="inline-flex mr-1">
@@ -57,6 +67,7 @@ const Header = () => {
               Login
             </a>
           </li>
+          
         </ul>
       </div>
     </div>
