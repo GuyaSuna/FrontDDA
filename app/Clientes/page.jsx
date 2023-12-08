@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import Link from "@/node_modules/next/link";
-// import { useRouter } from "next/navigation";
-// import LoginPage from "../LogIn/page";
+import { useRouter } from "next/navigation";
+import LoginPage from "../LogIn/page";
+import Link from "next/link";
 
 const clientes = () => {
   // const router = useRouter();
@@ -141,8 +141,9 @@ const clientes = () => {
         </div>
         <div className="mt-6 flex items-center justify-end gap-x-6">
           <Link
-            href="/"
+            type="button"
             className="bg-blue-500 ml-10 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
+            href="/"
           >
             Volver
           </Link>
