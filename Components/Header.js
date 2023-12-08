@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Header = () => {
@@ -112,8 +113,8 @@ const Header = () => {
             <div className="block w-px h-6 mx-3 bg-gray-400 dark:bg-gray-700" />
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              href="/LogIn"
               className="flex items-center mr-4 text-white hover:text-black"
             >
               <span className="inline-flex mr-1">
@@ -133,7 +134,7 @@ const Header = () => {
                 </svg>
               </span>
               Login
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
