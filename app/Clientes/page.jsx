@@ -1,10 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
-import LoginPage from "../LogIn/page";
+import Link from "@/node_modules/next/link";
+// import { useRouter } from "next/navigation";
+// import LoginPage from "../LogIn/page";
 
 const clientes = () => {
-  const router = useRouter();
+  // const router = useRouter();
 
   const [clientName, setClientName] = useState("");
   const [esVip, setEsVip] = useState(false);
@@ -139,13 +140,12 @@ const clientes = () => {
           </div>
         </div>
         <div className="mt-6 flex items-center justify-end gap-x-6">
-          <button
-            type="button"
+          <Link
+            href="/"
             className="bg-blue-500 ml-10 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
-            onClick={() => router.push("/")}
           >
             Volver
-          </button>
+          </Link>
           <button
             type="button"
             className="bg-blue-500 ml-10 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"

@@ -55,7 +55,7 @@ const venta = () => {
             />
           </div>
 
-          {/* <div className="mb-6">
+          <div className="mb-6">
             <label
               htmlFor="image"
               className="block text-sm font-medium text-gray-600"
@@ -71,7 +71,7 @@ const venta = () => {
               accept="image/"
               className="mt-1 p-2 w-full border-b-2 border-green-500 focus:outline-none focus:border-green-700"
             />
-          </div> */}
+          </div>
           <button
             type="button"
             className="bg-blue-500 ml-10 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
