@@ -2,8 +2,34 @@
 import React from 'react'
 
 const Sidebar = () => {
+  const links = [
+    {
+      label: "LogIn",
+      route: "./LogIn",
+    },
+    {
+      label: "Clientes",
+      route: "./Clientes",
+    },
+    {
+      label: "Productos",
+      route: "./Productos",
+    },
+    {
+      label: "Home",
+      route: "/",
+    },
+  ];
+
   return (
     <div className="flex flex-col h-full p-3 w-72 dark:bg-gray-900 dark:text-gray-100 justify-between">
+      <div>
+        {links.map(({ label, route }) => (
+          <li key={route}>
+            <Link href={route}>{label}</Link>
+          </li>
+        ))}
+      </div>
     <ul className="flex flex-col space-y-1 w-full md:w-full">
       <li className='mb-10'>
         <div className="flex items-center  justify-center md:justify-center md:w-full   bg-blue-900 dark:bg-gray-900 border-none">
