@@ -26,9 +26,17 @@ const logIn = async (name , password) => {
           return false;
         }
 };
-     
+const getAllProducts = async () => {
+  try{
+    const response = await fetch(`${URL}/products`);
+    const data = await response.json();
+    return data.data;
+  }catch (error){
+    console.error(`Error en la funcion : ${error.message}`);
+  }
+}     
      
 export{
-  logIn
-
+  logIn,
+  getAllProducts
 } ;

@@ -2,10 +2,16 @@
 import { useRouter } from "next/navigation";
 import RootLayout from "./layout";
 import CardsStatistics from"@/Components/CardsStatistics";
+import Link from "next/link";
 
 
 function Home() {
-  
+  const links = [
+    {
+      label: "AllProducts",
+      route: "./AllProducts",
+    },
+  ];
   return (
     <div className="display-flex min-h-screen w-full flex-col items-center justify-between  bg-slate-800">
       
@@ -23,12 +29,13 @@ function Home() {
                 </h3>
               </div>
               <div className="relative w-full max-w-full flex-grow flex-1 text-right">
-                <button
+                <Link
                   className="bg-blue-500 dark:bg-gray-100 text-white active:bg-blue-600 dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 hover:bg-gray-400"
                   type="button"
+                  href="/AllProducts"
                 >
                   Ver todos
-                </button>
+                </Link>
               </div>
             </div>
             <div className="block w-full overflow-x-auto">
