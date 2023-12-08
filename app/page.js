@@ -1,7 +1,9 @@
 import CardsStatistics from "@/Components/CardsStatistics";
 import Sidebar from "@/Components/Sidebar";
 import Image from "next/image";
+import React from "react";
 
+const Home = () => {
   return (
     <div className="flex flex-col min-h-screen bg-blue-900 dark:bg-gray-900 text-gray-800 sm:flex-row">
       <div className="sidebar  transform transition-transform duration-150 ease-in  md:shadow-md md:translate-x-0  bg-blue-900 dark:bg-gray-900 text-white w-1/4 ">
@@ -9,7 +11,7 @@ import Image from "next/image";
       </div>
       <div className="display-flex min-h-screen w-full flex-col items-center justify-between  bg-slate-800">
         {/* Statistics Cards */}
-        <CardsStatistics/> 
+        <CardsStatistics />
         {/* ./Statistics Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 p-4 gap-4">
           {/* Social Traffic */}
@@ -441,6 +443,6 @@ import Image from "next/image";
       </div>
     </div>
   );
-}
+};
 
 export default Home;

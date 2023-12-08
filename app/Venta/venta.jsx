@@ -1,43 +1,6 @@
-"use client"; //va?
 import React from "react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import Link from "@/node_modules/next/link";
 
-const ProductPage = () => {
-  const router = useRouter();
-
-  const [image, setImage] = useState();
-  const [stock, setStock] = useState();
-  const [price, setPrice] = useState();
-  const [description, setDescription] = useState();
-
-  const handleDescriptionChange = (e) => {
-    setDescription(e.target.value);
-  };
-
-  const handlePriceChange = (e) => {
-    setPrice(e.target.value);
-  };
-
-  const handleStockChange = (e) => {
-    setStock(e.target.value);
-  };
-
-  // const handleImageChange = (e) => {
-  //   const file = e.target.value[0];
-  //   setImage(file);
-  // };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Aquí puedes enviar los datos del formulario, incluida la imagen, a tu servidor
-
-    // Después de enviar los datos, puedes redirigir a la página de inicio o a donde sea necesario
-    router.push("/Productos");
-  };
-
+const venta = () => {
   return (
     <main className="h-screen flex items-center justify-center bg-gray-900">
       <div className="bg-white p-8 rounded-lg shadow-md w-96 text-gray-800">
@@ -130,4 +93,4 @@ const ProductPage = () => {
   );
 };
 
-export default ProductPage;
+export default venta;
