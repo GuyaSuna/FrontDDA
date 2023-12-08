@@ -1,11 +1,11 @@
-'use client';
+"use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import LoginPage from "../LogIn/page";
 import Link from "next/link";
 
 const clientes = () => {
-  const router = useRouter();
+  // const router = useRouter();
 
   const [clientName, setClientName] = useState("");
   const [esVip, setEsVip] = useState(false);
@@ -143,7 +143,7 @@ const clientes = () => {
           <Link
             type="button"
             className="bg-blue-500 ml-10 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
-            href = "/"
+            href="/"
           >
             Volver
           </Link>
