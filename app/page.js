@@ -1,8 +1,29 @@
-import CardsStatistics from "@/Components/CardsStatistics";
-import Sidebar from "@/Components/Sidebar";
-import Image from "next/image";
+"use client";
+import { useRouter } from "next/navigation";
+import RootLayout from "./layout";
 
-export default function Home() {
+import Link from "next/link";
+
+function Home() {
+  const links = [
+    {
+      label: "LogIn",
+      route: "./LogIn",
+    },
+    {
+      label: "Clientes",
+      route: "./Clientes",
+    },
+    {
+      label: "Productos",
+      route: "./Productos",
+    },
+    {
+      label: "Home",
+      route: "/",
+    },
+  ];
+
   return (
     
       <div className="display-flex min-h-screen w-full flex-col items-center justify-between  bg-slate-800">
@@ -439,3 +460,5 @@ export default function Home() {
       </div>
   );
 }
+
+export default Home;
