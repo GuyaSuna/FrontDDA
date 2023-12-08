@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
-import React, { useState } from 'react';
-import { logIn } from '../../Api/api';
-import { useRouter } from 'next/navigation';
+import React, { useState } from "react";
+import { logIn } from "../../Api/api";
+import { useRouter } from "next/navigation";
 
 function LoginPage() {
   const router = useRouter();
@@ -11,20 +11,19 @@ function LoginPage() {
   const [password, setPassword] = useState("");
 
   const handleLogIn = async (e) => {
-    e.preventDefault(); 
-    console.log("ABRRRRRRRRRRRRR")
+    e.preventDefault();
+    console.log("ABRRRRRRRRRRRRR");
 
     try {
       const success = await logIn(name, password);
 
       if (success) {
-        router.push('/');
+        router.push("/");
       } else {
-
-        console.log('Inicio de sesión fallido');
+        console.log("Inicio de sesión fallido");
       }
     } catch (error) {
-      console.error('Error durante el inicio de sesión:', error);
+      console.error("Error durante el inicio de sesión:", error);
     }
   };
 
@@ -45,7 +44,10 @@ function LoginPage() {
         <h1 className="text-3xl font-bold mb-4">Login</h1>
         <form>
           <div className="mb-6">
-            <label htmlFor="username" className="block text-sm font-medium text-gray-600 mb-2">
+            <label
+              htmlFor="username"
+              className="block text-sm font-medium text-gray-600"
+            >
               Usuario
             </label>
             <input
@@ -59,7 +61,10 @@ function LoginPage() {
           </div>
 
           <div className="mb-6">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-600 mb-2">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-600"
+            >
               Contraseña
             </label>
             <input
@@ -83,7 +88,7 @@ function LoginPage() {
           <button
             type="button"
             className="bg-blue-500 ml-10 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
-            onClick={() => router.push('/registro')}
+            onClick={() => router.push("/Clientes")}
           >
             Registrarse
           </button>
