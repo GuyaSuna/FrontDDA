@@ -42,11 +42,12 @@ const clientes = () => {
             </h2>
             <div className="flex items-center">
               <input
-                type="checkbox"
-                id="check"
-                name="check"
-                className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                onChange={handleCheckboxChange}
+              type="checkbox"
+              id="check"
+              name="check"
+              checked={esVip}
+              className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              onChange={handleCheckboxChange}
               />
               <label htmlFor="check" className="ml-2 text-gray-700">
                 Cliente VIP
@@ -115,28 +116,26 @@ const clientes = () => {
               />
             </div>
             {esVip && (
-              <div className="block text-sm font-medium text-gray-600">
-                <div className="sm:col-span-2">
-                  <label
-                    htmlFor="region"
-                    className="block text-sm font-medium text-gray-600"
-                  >
-                    Fecha de Ingreso
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      type="date"
-                      id="clientDate"
-                      name="clientDate"
-                      value={clientDate}
-                      onChange={handleClientDateChange}
-                      autoComplete="address-level1"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
+  <div className="block text-sm font-medium text-gray-600">
+    <label
+      htmlFor="clientDate"
+      className="block text-sm font-medium text-gray-600"
+    >
+      Fecha de Ingreso
+    </label>
+    <div className="mt-2">
+      <input
+        type="date"
+        id="clientDate"
+        name="clientDate"
+        value={clientDate}
+        onChange={handleClientDateChange}
+        autoComplete="address-level1"
+        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+      />
+    </div>
+  </div>
+)}
           </div>
         </div>
         <div className="mt-6 flex items-center justify-end gap-x-6">
