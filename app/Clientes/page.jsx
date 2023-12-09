@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import LoginPage from "../LogIn/page";
+import { ClientRegister } from "../../Api/api";
 import Link from "next/link";
 
 const clientes = () => {
@@ -32,6 +33,25 @@ const clientes = () => {
     setEsVip(event.target.checked);
   };
 
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    console.log("ABRRRRRRRRRRRRR");
+
+    try {
+      const success = await ClientRegister(clientName, clientDirection, clientPhone,clientDate);
+
+      if (success) {
+        router.push("/");
+      } else {
+        console.log("Registro fallido");
+      }
+    } catch (error) {
+      console.error("Error durante el registro:", error);
+    }
+  }
+
+  
   return (
     <main className="h-screen flex items-center justify-center bg-gray-900">
       <form className="mx-auto max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl border p-4 border-gray-500 bg-gray-200 m-72">
@@ -149,6 +169,7 @@ const clientes = () => {
           <button
             type="button"
             className="bg-blue-500 ml-10 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
+            onClick={handleRegister}
           >
             Registrar
           </button>
