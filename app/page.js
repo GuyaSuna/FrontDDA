@@ -1,6 +1,7 @@
 import CardsStatistics from "@/Components/CardsStatistics";
 import Sidebar from "@/Components/Sidebar";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const Home = () => {
