@@ -2,7 +2,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import Link from "@/node_modules/next/link";
+import Link from "next/link";
 
 const ProductPage = () => {
   const router = useRouter();
