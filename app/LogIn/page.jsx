@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { logIn } from "../../Api/api";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 function LoginPage() {
   const router = useRouter();
@@ -85,13 +86,21 @@ function LoginPage() {
             Iniciar Sesión
           </button>
 
-          <button
+          <Link
             type="button"
             className="bg-blue-500 ml-10 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
-            onClick={() => router.push("/Clientes")}
+            href="Clientes"
           >
             Registrarse
-          </button>
+          </Link>
+
+          <Link
+            type="button"
+            className="bg-blue-500 ml-10 text-white py-2 px-4 mt-5 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
+            href="/"
+          >
+            Volver
+          </Link>
         </form>
       </div>
     </main>
