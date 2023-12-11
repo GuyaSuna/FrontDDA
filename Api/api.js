@@ -1,4 +1,4 @@
-const URL = "http://localhost:3000/"
+const URL = "http://localhost:5000/"
 
 const logIn = async (name , password) => {
         try {
@@ -27,15 +27,23 @@ const logIn = async (name , password) => {
         }
 };
 const getAllProducts = async () => {
-  try{
-    const response = await fetch(`${URL}/products`);
+  const apiUrl = `${URL}products`;
+
+  try {
+    const response = await fetch(apiUrl);
+
+    if (!response.ok) {
+      throw new Error(`La solicitud falló con código ${response.status}`);
+    }
+
     const data = await response.json();
-    return data.data;
-  }catch (error){
-    console.error(`Error en la funcion : ${error.message}`);
+    return data.data;  
+  } catch (error) {
+    console.error(`Error en la función: ${error.message}`);
+    throw error; 
   }
-}     
-     
+};
+  
 export{
   logIn,
   getAllProducts
