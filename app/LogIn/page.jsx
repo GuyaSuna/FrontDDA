@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import { logIn } from "../../Api/api";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 
 function LoginPage() {
@@ -36,7 +38,10 @@ function LoginPage() {
   };
 
   return (
-    <main className="h-screen flex items-center justify-center bg-gray-900">
+    <main
+    className="h-screen flex items-center justify-center bg-cover"
+    style={{ backgroundImage: "url('https://img.freepik.com/vector-premium/fondo-abstracto-azul-linea-luz-verde-espacio-blanco_156943-56.jpg')" }}
+  >
       <div className="bg-white p-8 rounded-lg shadow-md w-96 text-gray-800">
         <h1 className="text-3xl font-bold mb-4">Login</h1>
         <form>
@@ -82,13 +87,21 @@ function LoginPage() {
             Iniciar Sesión
           </button>
 
-          <button
+          <Link
             type="button"
             className="bg-blue-500 ml-10 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
-            onClick={() => router.push("/Clientes")}
+            href="Clientes"
           >
             Registrarse
-          </button>
+          </Link>
+
+          <Link
+            type="button"
+            className="bg-blue-500 ml-10 text-white py-2 px-4 mt-5 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
+            href="/"
+          >
+            Volver
+          </Link>
         </form>
       </div>
     </main>

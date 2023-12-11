@@ -42,7 +42,7 @@ const Sidebar = () => {
         </li>
         <li>
           <a
-            href="/"
+            href="#"
             className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
           >
             <span className="inline-flex justify-center items-center ml-4">
@@ -65,7 +65,7 @@ const Sidebar = () => {
           </a>
         </li>
         <li>
-          <a
+          <Link
             href="/Clientes"
             className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
           >
@@ -88,11 +88,11 @@ const Sidebar = () => {
             <span className="ml-2 text-sm tracking-wide truncate">
               Alta Clientes
             </span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a
-            href="/AllProducts"
+          <Link
+            href="/Venta"
             className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
           >
             <span className="inline-flex justify-center items-center ml-4">
@@ -112,11 +112,11 @@ const Sidebar = () => {
               </svg>
             </span>
             <span className="ml-2 text-sm tracking-wide truncate">Ventas</span>
-          </a>
+          </Link>
         </li>
         <li>
           <a
-            href="/Productos"
+            href="#"
             className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
           >
             <span className="inline-flex justify-center items-center ml-4">

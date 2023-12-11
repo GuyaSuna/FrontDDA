@@ -1,20 +1,16 @@
-"use client"; 
-import React from "react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+'use client'
 import Link from "next/link";
+import React, { useState } from "react";
 
-const ProductPage = () => {
-  const router = useRouter();
-
-  const [image, setImage] = useState();
-  const [stock, setStock] = useState();
-  const [price, setPrice] = useState();
-  const [description, setDescription] = useState();
+const venta = () => {
+  const [description , setDescription] = useState("");
+  const [price , setPrice] = useState(0);
+  const [stock , setStock] = useState(0);
+  const [image , setImage] = useState("");
 
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
-  };
+  }
 
   const handlePriceChange = (e) => {
     setPrice(e.target.value);
@@ -24,18 +20,8 @@ const ProductPage = () => {
     setStock(e.target.value);
   };
 
-  // const handleImageChange = (e) => {
-  //   const file = e.target.value[0];
-  //   setImage(file);
-  // };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Aquí puedes enviar los datos del formulario, incluida la imagen, a tu servidor
-
-    // Después de enviar los datos, puedes redirigir a la página de inicio o a donde sea necesario
-    router.push("/Productos");
+  const handleImageChange = (e) => {
+    setImage(e.target.value);
   };
 
   return (
@@ -92,7 +78,7 @@ const ProductPage = () => {
             />
           </div>
 
-          {/* <div className="mb-6">
+          <div className="mb-6">
             <label
               htmlFor="image"
               className="block text-sm font-medium text-gray-600"
@@ -108,14 +94,14 @@ const ProductPage = () => {
               accept="image/"
               className="mt-1 p-2 w-full border-b-2 border-green-500 focus:outline-none focus:border-green-700"
             />
-          </div> */}
-          <button
+          </div>
+          <Link
             type="button"
             className="bg-blue-500 ml-10 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
-            onClick={() => router.push("/")}
+            href="/"
           >
             Volver
-          </button>
+          </Link>
 
           <button
             type="button"
@@ -130,4 +116,4 @@ const ProductPage = () => {
   );
 };
 
-export default ProductPage;
+export default venta;
