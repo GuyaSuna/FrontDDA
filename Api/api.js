@@ -27,11 +27,13 @@ const logIn = async (name , password) => {
         }
 };
 const getAllProducts = async () => {
-  const apiUrl = `${URL}products`;
-
   try {
-    const response = await fetch(apiUrl);
-
+  const response = await fetch(`${URL}products`,{
+    method: `GET`,
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  });
     if (!response.ok) {
       throw new Error(`La solicitud falló con código ${response.status}`);
     }
