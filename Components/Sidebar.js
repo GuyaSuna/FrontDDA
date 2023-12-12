@@ -28,7 +28,7 @@ const Sidebar = () => {
           <div className="flex items-center  justify-center md:justify-center md:w-full   bg-blue-900 dark:bg-gray-900 border-none">
             <img
               className="w-14 h-14 md:w-24 md:h-24 mr-2 rounded-full overflow-hidden mt-10"
-              src="https://media.licdn.com/dms/image/D4D03AQFXnf7PSVORQA/profile-displayphoto-shrink_200_200/0/1693490764387?e=1706745600&v=beta&t=9k1V4te9mrVyGb7Nz7mqjHjv-DFoos98wEUtRh-xJps"
+              src="https://media.licdn.com/dms/image/C5603AQG2FNXYCpKj2Q/profile-displayphoto-shrink_400_400/0/1619473078862?e=2147483647&v=beta&t=eG8gjOGxMvUFFwggd7aY-jDXQCbJIBPzv-I42FJ9QdU"
             />
             <span className="hidden md:block text-white">ADMIN</span>
           </div>
