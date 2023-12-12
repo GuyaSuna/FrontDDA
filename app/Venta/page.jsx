@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useState } from "react";
-import ProductPage from "../Productos/page";
+
 
 const venta = () => {
   const [nroVenta, setNroVenta] = useState("");
@@ -34,7 +34,7 @@ const venta = () => {
           <div>
             <h1>Lista de Productos</h1>
             <ul>
-              {products.map((product) => (
+              {prod.map((product) => (
                 <li key={product.id}>
                   {product.name} - Precio: {product.price}
                 </li>
