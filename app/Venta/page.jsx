@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from "react";
-import ProductPage from "../Productos/page";
-import { VentaRegister } from "../../Api/api";
+import React, { useState, useEffect } from "react";
+import Modal from "react-modal";
+import { VentaRegister, getAllProducts } from "../../Api/api";
 
 const Venta = () => {
   const [ventaNumber, setVentaNumber] = useState("");
@@ -9,8 +9,17 @@ const Venta = () => {
   const [seller, setSeller] = useState("");
   const [purchaseDate, setPurchaseDate] = useState("");
   const [productList, setProductList] = useState([]);
+  const [productsChecked, setProductsChecked] = useState([]);
   const [totalSale, setTotalSale] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("ABRRRRRRRRRRRRR");
@@ -35,9 +44,22 @@ const Venta = () => {
     }
   };
 
+  const fetchData = async () => {
+    try {
+      const data = await getAllProducts();
+      console.log("Data:", data);
+      setProductList(data);
+    } catch (error) {
+      console.error(`Error fetching data: ${error.message}`);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const handleProductAdd = () => {
-    // Lógica para enviar los datos del formulario
-    // Puedes manejar esto según tus necesidades
+    openModal();
   };
 
   return (
@@ -104,9 +126,6 @@ const Venta = () => {
             Product List
           </label>
           <ul className="list-disc list-inside">
-            {productList.map((product, index) => (
-              <div key={index}>{product}</div>
-            ))}
             <button
               type="button"
               onClick={handleProductAdd}
@@ -136,6 +155,53 @@ const Venta = () => {
           Submit
         </button>
       </div>
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Product List Modal"
+        className="modal-content"
+        overlayClassName="modal-overlay"
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-2xl font-bold">Product List</h2>
+          <button
+            onClick={closeModal}
+            className="bg-blue-500 text-white px-4 py-2 rounded-md"
+          >
+            Close
+          </button>
+        </div>
+        <div className="flex flex-wrap justify-center">
+          {productList.map((product, index) => (
+            <div
+              key={product.id}
+              className="bg-white p-4 rounded-md shadow-md flex flex-col items-center m-2"
+              style={{ width: "150px" }}
+            >
+              <img
+                src={product.imageUrl} // Asegúrate de tener una propiedad "imageUrl" en tu objeto de producto
+                alt={product.nombre}
+                className="mb-2 rounded-md"
+                style={{ width: "100%", height: "100px", objectFit: "cover" }}
+              />
+              <p className="text-lg font-semibold">{product.nombre}</p>
+              <button
+                onClick={() => handleProductSelect(product)}
+                className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md"
+              >
+                Add
+              </button>
+            </div>
+          ))}
+        </div>
+      </Modal>
     </main>
   );
 };
