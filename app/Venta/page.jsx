@@ -197,30 +197,6 @@ const Venta = () => {
 
 export default Venta;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // pages/venta.js
 // import React from 'react';
 
