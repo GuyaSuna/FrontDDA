@@ -7,8 +7,7 @@ import React from "react";
 const Home = () => {
   return (
     <div className="flex flex-col min-h-screen bg-blue-900 dark:bg-gray-900 text-gray-800 sm:flex-row">
-      <div className="sidebar  transform transition-transform duration-150 ease-in  md:shadow-md md:translate-x-0  bg-blue-900 dark:bg-gray-900 text-white w-1/4 ">
-      </div>
+      <div className="sidebar  transform transition-transform duration-150 ease-in  md:shadow-md md:translate-x-0  bg-blue-900 dark:bg-gray-900 text-white w-1/4 "></div>
       <div className="display-flex min-h-screen w-full flex-col items-center justify-between  bg-slate-800">
         {/* Statistics Cards */}
         <CardsStatistics />
@@ -392,9 +391,7 @@ const Home = () => {
           </div>
         </div>
         {/* ./Recent Activities */}
-      </div>
-      {/* Task Summaries */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 p-4 gap-4 text-black dark:text-white">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 p-4 gap-4 text-black dark:text-white">
         <div className="md:col-span-2 xl:col-span-3">
           <h3 className="text-lg font-semibold">Registro de datos</h3>
         </div>
@@ -449,6 +446,9 @@ const Home = () => {
           </div>
         </div>
       </div>
+      </div>
+      {/* Task Summaries */}
+      
       {/* ./Task Summaries */}
     </div>
   );
