@@ -12,15 +12,19 @@ const allProducts = () => {
     const [search, setSearch] = useState("");
     const [searchFiltered, setSearchFiltered] = useState(products);
 
-    useEffect(()=>{
-        const fetchProducts = async () =>{
-            const response = await getAllProducts();
-            console.log(response, "Response");
-            setProducts(response);
-        };
-        fetchProducts().then(()=> console.log("fetched products"));
+    const fetchData = async () => {
+      try {
+        const data = await getAllProducts();
+        console.log('Data:', data); 
+        setProducts(data);
+      } catch (error) {
+        console.error(`Error fetching data: ${error.message}`);
+      }
+    };
+    
+    useEffect(() => {
+      fetchData();
     }, []);
-
     // useEffect (()=>{
     //     if(search === ""){
     //         setSearchFiltered(products);
@@ -65,14 +69,14 @@ const allProducts = () => {
     // </div>
 
     <div>
-      {products.map((product) => (
+      {products && products.map((product) => (
         <div
           key={product.codProd}
           className="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md"
         >
           <div className="relative mx-4 mt-4 h-96 overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700">
             <img
-              src={product.imageUrl[0].url}
+              src={product.imageUrl}
               className="h-full w-full object-cover"
               alt={product.nombre}
             />
