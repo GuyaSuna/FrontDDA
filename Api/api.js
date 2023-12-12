@@ -42,6 +42,7 @@ const VentaRegister = async (
       },
       body: JSON.stringify({
         nroVenta,
+        productList,
         totalVenta,
         fchCompra,
         nroVendedor,

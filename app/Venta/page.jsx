@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from "react";
 import ProductPage from "../Productos/page";
+import {VentaRegister} from "../../Api/api"
 
 const Venta = () => {
   const [ventaNumber, setVentaNumber] = useState("");
@@ -10,12 +11,24 @@ const Venta = () => {
   const [productList, setProductList] = useState([]);
   const [totalSale, setTotalSale] = useState("");
 
-  const handleProductAdd = () => {
-    // Lógica para agregar productos a la lista
-    // Puedes manejar esto según tus necesidades
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("ABRRRRRRRRRRRRR");
+
+    try {
+      const success = await VentaRegister(ventaNumber,productList,totalSale,purchaseDate, seller, client);
+
+      if (success) {
+        router.push("/");
+      } else {
+        console.log("Inicio de sesión fallido");
+      }
+    } catch (error) {
+      console.error("Error durante el inicio de sesión:", error);
+    }
   };
 
-  const handleSubmit = () => {
+  const handleProductAdd = () => {
     // Lógica para enviar los datos del formulario
     // Puedes manejar esto según tus necesidades
   };
