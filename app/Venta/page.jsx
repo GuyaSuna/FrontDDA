@@ -150,52 +150,67 @@ const Venta = () => {
       </div>
 
       <Modal
-  isOpen={modalIsOpen}
-  onRequestClose={closeModal}
-  contentLabel="Product List Modal"
-  className="modal-content"
-  overlayClassName="modal-overlay"
-  style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
->
-  <div className="flex justify-between items-center mb-4">
-    <h2 className="text-2xl font-bold">Product List</h2>
-    <button
-      onClick={closeModal}
-      className="bg-blue-500 text-white px-4 py-2 rounded-md"
-    >
-      Close
-    </button>
-  </div>
-  <div className="flex flex-wrap justify-center">
-    {productList.map((product, index) => (
-      <div
-        key={product.id}
-        className="bg-white p-4 rounded-md shadow-md flex flex-col items-center m-2"
-        style={{ width: "150px" }}
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Product List Modal"
       >
-        <img
-          src={product.imageUrl} // Asegúrate de tener una propiedad "imageUrl" en tu objeto de producto
-          alt={product.nombre}
-          className="mb-2 rounded-md"
-          style={{ width: "100%", height: "100px", objectFit: "cover" }}
-        />
-        <p className="text-lg font-semibold">{product.nombre}</p>
-        <button
-          onClick={() => handleProductSelect(product)}
-          className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md"
-        >
-          Add
+        <h2 className="text-2xl font-bold mb-4">Product List</h2>
+        <div className="flex flex-wrap justify-center">
+  {productList.map((product, index) => (
+    <div
+      key={product.id}
+      className="flex-shrink-0 bg-white p-4 rounded-md shadow-md flex flex-col items-center m-2"
+      style={{ width: "150px" }}
+    >
+      <img
+        src={product.imageUrl}
+        alt={product.nombre}
+        className="mb-2 rounded-md"
+        style={{ width: "100%", height: "100px", objectFit: "cover" }}
+      />
+      <p className="text-lg font-semibold">{product.nombre}</p>
+      <button
+        onClick={() => handleProductSelect(product)}
+        className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md"
+      >
+        Add
+      </button>
+    </div>
+  ))}
+</div>
+        <button onClick={closeModal} className="bg-blue-500 text-white px-4 py-2 rounded-md mt-4">
+          Close
         </button>
-      </div>
-    ))}
-  </div>
-</Modal>
-
+      </Modal>
     </main>
   );
 };
 
 export default Venta;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // pages/venta.js
 // import React from 'react';
