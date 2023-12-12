@@ -1,5 +1,6 @@
 'use client'
 import React, { useState } from "react";
+import ProductPage from "../Productos/page";
 
 const Venta = () => {
   const [ventaNumber, setVentaNumber] = useState("");
