@@ -2,7 +2,7 @@ const URL = "http://localhost:5000/"
 
 const logIn = async (name , password) => {
         try {
-          const response = await fetch(`${URL}login`, {
+          const response = await fetch(`${URL}vendedor/LogIn`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -15,8 +15,9 @@ const logIn = async (name , password) => {
           }
 
           const data = await response.json();
-      
-          if (data.authenticated) {
+          console.log(data);
+
+          if (data.nroVendedor) {
             return true;
           } else {
             return false;
