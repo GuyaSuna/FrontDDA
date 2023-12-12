@@ -79,24 +79,29 @@ const ProductRegister = async (
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        codProd,
-        nombre,
-        descripcion,
-        precio,
-        cantStock,
-        imageUrl,
+       "codProd": codProd,
+        "nombre" : nombre,
+        "descripcion" :descripcion,
+         "precio" :precio,
+        "cantStock" :cantStock,
+        "imageUrl":imageUrl
       }),
     });
+   
 
-    if (!response.ok) {
-      throw new Error(`Error en la solicitud: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log(data);
+    if (response.ok) {
+      const responseBody = await response.json();
+      console.log("Response body:", responseBody);
 
-    if (data.codProd) {
-      return true;
+      if (responseBody.codProd) {
+        console.log("Registro exitoso");
+        return true;
+      } else {
+        console.log("Registro fallido");
+        return false;
+      }
     } else {
+      console.error("Error en la solicitud:", response.status);
       return false;
     }
   } catch (error) {

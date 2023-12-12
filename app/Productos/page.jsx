@@ -39,8 +39,10 @@ const ProductPage = () => {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
+
     if (file) {
       const imageUrl = URL.createObjectURL(file);
+      console.log(imageUrl)
       setImage(imageUrl);
     }
   };
