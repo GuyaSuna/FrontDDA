@@ -63,6 +63,47 @@ const VentaRegister = async (
   }
 };
 
+const ProductRegister = async (
+  codProd,
+  nombre,
+  descripcion,
+  precio,
+  cantStock,
+  imageUrl
+) => {
+  try {
+    const response = await fetch(`${URL}products`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        codProd,
+        nombre,
+        descripcion,
+        precio,
+        cantStock,
+        imageUrl,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log(data);
+
+    if (data.codProd) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error(`An error has ocurred in Producto: ${error.message}`);
+    return false;
+  }
+};
+
 const ClientRegister = async (name, address, phone, date) => {
   try {
     if (date != "") {
@@ -126,4 +167,10 @@ const getAllProducts = async () => {
   }
 };
 
-export { logIn, getAllProducts, ClientRegister, VentaRegister };
+export {
+  logIn,
+  getAllProducts,
+  ClientRegister,
+  VentaRegister,
+  ProductRegister,
+};
