@@ -1,78 +1,93 @@
 const URL = "http://localhost:5000/"
 
-const logIn = async (name , password) => {
-        try {
-          const response = await fetch(`${URL}vendedor/LogIn`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ name, password }),
-          });
-      
-          if (!response.ok) {
-            throw new Error(`Error en la solicitud: ${response.status}`);
-          }
-
-          const data = await response.json();
-          console.log(data);
-
-          if (data.nroVendedor) {
-            return true;
-          } else {
-            return false;
-          }
-        } catch (error) {
-          console.error(`Error en la función logIn: ${error.message}`);
-          return false;
-        }
-};
-
-const ClientRegister = async (name , address ,phone, date) => {
+const logIn = async (name, password) => {
   try {
-    if(date != ""){
-      const response = await fetch(`${URL}Clientes`, {
+    const response = await fetch(`${URL}vendedor/LogIn`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name, address, phone}),
+      body: JSON.stringify({
+        name: name,
+        password: password,
+      }),
     });
-    }else{
-      const response = await fetch(`${URL}Clientes`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, address, phone, date}),
-      });
-    }
-    
 
-    if (!response.ok) {
-      throw new Error(`Error en la solicitud: ${response.status}`);
-    }
+    console.log("Response status:", response.status);
 
-    const data = await response.json();
+    if (response.ok) {
+      const responseBody = await response.json();
+      console.log("Response body:", responseBody);
 
-    if (data.authenticated) {
-      return true;
+      if (responseBody.nroVendedor) {
+        console.log("Registro exitoso");
+        return true;
+      } else {
+        console.log("Registro fallido");
+        return false;
+      }
     } else {
+      console.error("Error en la solicitud:", response.status);
       return false;
     }
   } catch (error) {
-    console.error(`An error has ocurred in ClientRegister: ${error.message}`);
+    console.error(`An error has occurred in ClientRegister: ${error.message}`);
     return false;
   }
 };
+
+
+
+const ClientRegister = async (name, address, phone, date) => {
+  try {
+    let url = `${URL}clientes/regular`;
+    if (date !== "") {
+      url = `${URL}clientes/vip`;
+    }
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nombre: name,
+        direccion: address,
+        telefono: parseInt(phone),
+        fchIngreso: date,
+      }),
+    });
+
+    console.log("Response status:", response.status);
+
+    if (response.ok) {
+      const responseBody = await response.json();
+      console.log("Response body:", responseBody);
+
+      if (responseBody.idCli) {
+        console.log("Registro exitoso");
+        return true;
+      } else {
+        console.log("Registro fallido");
+        return false;
+      }
+    } else {
+      console.error("Error en la solicitud:", response.status);
+      return false;
+    }
+  } catch (error) {
+    console.error(`An error has occurred in ClientRegister: ${error.message}`);
+    return false;
+  }
+};
+
+
      
 const getAllProducts = async () => {
-  try {
-  const response = await fetch(`${URL}products`,{
-    method: `GET`,
-    headers: {
-      'Content-Type': 'application/json',
-    }
+  try{
+  const response = await fetch(`${URL}products`, {
+    method: "GET",
+
   });
     if (!response.ok) {
       throw new Error(`La solicitud falló con código ${response.status}`);
