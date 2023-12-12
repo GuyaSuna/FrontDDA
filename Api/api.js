@@ -2,7 +2,7 @@ const URL = "http://localhost:5000/";
 
 const logIn = async (name, password) => {
   try {
-    const response = await fetch(`${URL}login`, {
+    const response = await fetch(`${URL}vendedor/LogIn`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -15,8 +15,9 @@ const logIn = async (name, password) => {
     }
 
     const data = await response.json();
+    console.log(data);
 
-    if (data.authenticated) {
+    if (data.nroVendedor) {
       return true;
     } else {
       return false;
@@ -65,11 +66,13 @@ const ClientRegister = async (name, address, phone, date) => {
 };
 
 const getAllProducts = async () => {
-  const apiUrl = `${URL}products`;
-
   try {
-    const response = await fetch(apiUrl);
-
+    const response = await fetch(`${URL}products`, {
+      method: `GET`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     if (!response.ok) {
       throw new Error(`La solicitud falló con código ${response.status}`);
     }
