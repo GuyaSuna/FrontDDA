@@ -83,19 +83,25 @@ const ClientRegister = async (name, address, phone, date) => {
       });
     }
 
-    if (!response.ok) {
-      throw new Error(`Error en la solicitud: ${response.status}`);
-    }
+    console.log("Response status:", response.status);
 
-    const data = await response.json();
+    if (response.ok) {
+      const responseBody = await response.json();
+      console.log("Response body:", responseBody);
 
-    if (data.authenticated) {
-      return true;
+      if (responseBody.nroVendedor) {
+        console.log("Registro exitoso");
+        return true;
+      } else {
+        console.log("Registro fallido");
+        return false;
+      }
     } else {
+      console.error("Error en la solicitud:", response.status);
       return false;
     }
   } catch (error) {
-    console.error(`An error has ocurred in ClientRegister: ${error.message}`);
+    console.error(`An error has occurred in ClientRegister: ${error.message}`);
     return false;
   }
 };
