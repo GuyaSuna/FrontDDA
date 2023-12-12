@@ -6,30 +6,20 @@ import React from "react";
 
 const Home = () => {
   return (
-    <div className="flex flex-col min-h-screen bg-blue-900 dark:bg-gray-900 text-gray-800 sm:flex-row">
-      <div className="sidebar  transform transition-transform duration-150 ease-in  md:shadow-md md:translate-x-0  bg-blue-900 dark:bg-gray-900 text-white w-1/4 "></div>
-      <div className="display-flex min-h-screen w-full flex-col items-center justify-between  bg-slate-800">
-        {/* Statistics Cards */}
-        <CardsStatistics />
-        {/* ./Statistics Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 p-4 gap-4">
-          {/* Social Traffic */}
-          <div className="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded">
-            <div className="rounded-t mb-0 px-0 border-0">
-              <div className="flex flex-wrap items-center px-4 py-2">
-                <div className="relative w-full max-w-full flex-grow flex-1">
-                  <h3 className="font-semibold text-base text-gray-900 dark:text-gray-50">
-                    Mejores productos
-                  </h3>
-                </div>
-                <div className="relative w-full max-w-full flex-grow flex-1 text-right">
-                  <button
-                    className="bg-blue-500 dark:bg-gray-100 text-white active:bg-blue-600 dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 hover:bg-gray-400"
-                    type="button"
-                  >
-                    Ver todos
-                  </button>
-                </div>
+    <div className="display-flex min-h-screen w-full flex-col items-center justify-between  bg-slate-800">
+      
+      {/* Statistics Cards */}
+      <CardsStatistics />
+      {/* ./Statistics Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 p-4 gap-4">
+        {/* Social Traffic */}
+        <div className="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded">
+          <div className="rounded-t mb-0 px-0 border-0">
+            <div className="flex flex-wrap items-center px-4 py-2">
+              <div className="relative w-full max-w-full flex-grow flex-1">
+                <h3 className="font-semibold text-base text-gray-900 dark:text-gray-50">
+                  Mejores productos
+                </h3>
               </div>
               <div className="relative w-full max-w-full flex-grow flex-1 text-right">
                 <Link
@@ -391,7 +381,9 @@ const Home = () => {
           </div>
         </div>
         {/* ./Recent Activities */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 p-4 gap-4 text-black dark:text-white">
+      </div>
+      {/* Task Summaries */}
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 p-4 gap-4 text-black dark:text-white">
         <div className="md:col-span-2 xl:col-span-3">
           <h3 className="text-lg font-semibold">Registro de datos</h3>
         </div>
@@ -446,9 +438,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-      </div>
-      {/* Task Summaries */}
-      
       {/* ./Task Summaries */}
     </div>
   );
