@@ -7,7 +7,7 @@ import Link from "next/link";
 
 
 function LoginPage() {
- 
+  const router = useRouter();
 
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");

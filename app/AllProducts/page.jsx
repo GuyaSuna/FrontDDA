@@ -3,9 +3,9 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react'
 import {getAllProducts} from '../../Api/api';
-import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
+// import Card from "react-bootstrap/Card";
+// import Col from "react-bootstrap/Col";
+// import Row from "react-bootstrap/Row";
 
 const allProducts = () => {
     const [products, setProducts] = useState([]);

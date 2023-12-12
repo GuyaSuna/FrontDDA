@@ -6,7 +6,7 @@ import { ClientRegister } from "../../Api/api";
 import Link from "next/link";
 
 const clientes = () => {
-  // const router = useRouter();
+const router = useRouter();
 
   const [clientName, setClientName] = useState("");
   const [esVip, setEsVip] = useState(false);
@@ -15,17 +15,21 @@ const clientes = () => {
   const [clientDate, setClientDate] = useState("");
 
   const handleClientNameChange = (e) => {
+    console.log(e.target.value);
     setClientName(e.target.value);
   };
   const handleClientDirectionChange = (e) => {
+    console.log(e.target.value);
     setClientDirection(e.target.value);
   };
 
   const handleClientPhoneChange = (e) => {
+    console.log(e.target.value);
     setClientPhone(e.target.value);
   };
 
   const handleClientDateChange = (e) => {
+    console.log(e.target.value);
     setClientDate(e.target.value);
   };
 
