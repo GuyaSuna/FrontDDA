@@ -162,7 +162,7 @@ const getAllProducts = async () => {
       },
     });
     if (!response.ok) {
-      throw new Error(`La solicitud falló con código ${response.status}`);
+      throw new Error(`La solicitud falló  ${response.status}`);
     }
 
     const data = await response.json();
@@ -172,11 +172,33 @@ const getAllProducts = async () => {
     throw error;
   }
 };
+const getProduct = codProd => {
+  return new Promise((resolve, reject) => {
+    fetch(`${URL}products/${codProd}`, {
+      method: "GET",
+    })
+      .then(response => {
+        if (!response.ok) {
+          const errorMessage = `La solicitud falló con código: ${response.status}`;
+          reject(errorMessage);
+        }
+        return response.json();
+      })
+      .then(data => {
+        resolve(data);
+      })
+      .catch(error => {
+        reject(error.message || "Error desconocido");
+      });
+  });
+};
 
-export {
+
+
+
+export{
   logIn,
   getAllProducts,
   ClientRegister,
-  VentaRegister,
-  ProductRegister,
-};
+  getProduct
+} ;
