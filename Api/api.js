@@ -27,6 +27,41 @@ const logIn = async (name, password) => {
     return false;
   }
 };
+const VentaRegister = async (
+  nroVenta,
+  totalVenta,
+  fchCompra,
+  nroVendedor,
+  cliente
+) => {
+  try {
+    const response = await fetch(`${URL}Venta`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nroVenta,
+        totalVenta,
+        fchCompra,
+        nroVendedor,
+        cliente,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.status}`);
+    }
+    if (response.authenticated) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error(`An error has ocurred in Venta: ${error.message}`);
+    return false;
+  }
+};
 
 const ClientRegister = async (name, address, phone, date) => {
   try {
@@ -85,4 +120,4 @@ const getAllProducts = async () => {
   }
 };
 
-export { logIn, getAllProducts, ClientRegister };
+export { logIn, getAllProducts, ClientRegister, VentaRegister };

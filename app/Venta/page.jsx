@@ -1,27 +1,13 @@
-'use client'
+"use client";
 import Link from "next/link";
 import React, { useState } from "react";
+import ProductPage from "../Productos/page";
 
 const venta = () => {
-  const [description , setDescription] = useState("");
-  const [price , setPrice] = useState(0);
-  const [stock , setStock] = useState(0);
-  const [image , setImage] = useState("");
+  const [nroVenta, setNroVenta] = useState("");
 
-  const handleDescriptionChange = (e) => {
-    setDescription(e.target.value);
-  }
-
-  const handlePriceChange = (e) => {
-    setPrice(e.target.value);
-  };
-
-  const handleStockChange = (e) => {
-    setStock(e.target.value);
-  };
-
-  const handleImageChange = (e) => {
-    setImage(e.target.value);
+  const handleNroVentaChange = (e) => {
+    setNroVenta(e.target.value);
   };
 
   return (
@@ -34,32 +20,26 @@ const venta = () => {
               htmlFor="username"
               className="block text-sm font-medium text-gray-600"
             >
-              Descripcion
-            </label>
-            <input
-              type="text"
-              id="description"
-              name="description"
-              value={description}
-              onChange={handleDescriptionChange}
-              className="mt-1 p-2 w-full border-b-2 border-blue-500 focus:outline-none focus:border-blue-700"
-            />
-          </div>
-          <div className="mb-6">
-            <label
-              htmlFor="username"
-              className="block text-sm font-medium text-gray-600"
-            >
-              Precio
+              Numero de venta
             </label>
             <input
               type="number"
-              id="price"
-              name="price"
-              value={price}
-              onChange={handlePriceChange}
+              id="nroVenta"
+              name="nroVenta"
+              value={nroVenta}
+              onChange={handleNroVentaChange}
               className="mt-1 p-2 w-full border-b-2 border-blue-500 focus:outline-none focus:border-blue-700"
             />
+          </div>
+          <div>
+            <h1>Lista de Productos</h1>
+            <ul>
+              {products.map((product) => (
+                <li key={product.id}>
+                  {product.name} - Precio: {product.price}
+                </li>
+              ))}
+            </ul>
           </div>
           <div className="mb-6">
             <label
