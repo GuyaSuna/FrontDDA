@@ -1,119 +1,263 @@
-'use client'
-import Link from "next/link";
-import React, { useState } from "react";
+"use client";
+import React, { useState, useEffect } from "react";
+import Modal from "react-modal";
+import { VentaRegister, getAllProducts } from "../../Api/api";
 
-const venta = () => {
-  const [description , setDescription] = useState("");
-  const [price , setPrice] = useState(0);
-  const [stock , setStock] = useState(0);
-  const [image , setImage] = useState("");
+const Venta = () => {
+  const [ventaNumber, setVentaNumber] = useState("");
+  const [client, setClient] = useState("");
+  const [seller, setSeller] = useState("");
+  const [purchaseDate, setPurchaseDate] = useState("");
+  const [productList, setProductList] = useState([]);
+  const [productsChecked, setProductsChecked] = useState([]);
+  const [totalSale, setTotalSale] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const handleDescriptionChange = (e) => {
-    setDescription(e.target.value);
-  }
-
-  const handlePriceChange = (e) => {
-    setPrice(e.target.value);
+  const openModal = () => {
+    setModalIsOpen(true);
   };
 
-  const handleStockChange = (e) => {
-    setStock(e.target.value);
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("ABRRRRRRRRRRRRR");
+
+    try {
+      const success = await VentaRegister(
+        ventaNumber,
+        productList,
+        totalSale,
+        purchaseDate,
+        seller,
+        client
+      );
+
+      if (success) {
+        router.push("/");
+      } else {
+        console.log("Inicio de sesión fallido");
+      }
+    } catch (error) {
+      console.error("Error durante el inicio de sesión:", error);
+    }
   };
 
-  const handleImageChange = (e) => {
-    setImage(e.target.value);
+  const fetchData = async () => {
+    try {
+      const data = await getAllProducts();
+      console.log("Data:", data);
+      setProductList(data);
+    } catch (error) {
+      console.error(`Error fetching data: ${error.message}`);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const handleProductAdd = () => {
+    openModal();
   };
 
   return (
-    <main className="h-screen flex items-center justify-center bg-gray-900">
-      <div className="bg-white p-8 rounded-lg shadow-md w-96 text-gray-800">
-        <h1 className="text-3xl font-bold mb-4">Agregar Producto</h1>
-        <form>
-          <div className="mb-6">
-            <label
-              htmlFor="username"
-              className="block text-sm font-medium text-gray-600"
-            >
-              Descripcion
-            </label>
-            <input
-              type="text"
-              id="description"
-              name="description"
-              value={description}
-              onChange={handleDescriptionChange}
-              className="mt-1 p-2 w-full border-b-2 border-blue-500 focus:outline-none focus:border-blue-700"
-            />
-          </div>
-          <div className="mb-6">
-            <label
-              htmlFor="username"
-              className="block text-sm font-medium text-gray-600"
-            >
-              Precio
-            </label>
-            <input
-              type="number"
-              id="price"
-              name="price"
-              value={price}
-              onChange={handlePriceChange}
-              className="mt-1 p-2 w-full border-b-2 border-blue-500 focus:outline-none focus:border-blue-700"
-            />
-          </div>
-          <div className="mb-6">
-            <label
-              htmlFor="username"
-              className="block text-sm font-medium text-gray-600"
-            >
-              Stock
-            </label>
-            <input
-              type="number"
-              id="stock"
-              name="stock"
-              value={stock}
-              onChange={handleStockChange}
-              className="mt-1 p-2 w-full border-b-2 border-blue-500 focus:outline-none focus:border-blue-700"
-            />
-          </div>
+    <main
+      className="h-screen flex items-center justify-center bg-cover"
+      style={{
+        backgroundImage:
+          "url('https://img.freepik.com/vector-premium/fondo-abstracto-azul-linea-luz-verde-espacio-blanco_156943-56.jpg')",
+      }}
+    >
+      <div className="container mx-auto my-8 p-8 bg-gray-100 shadow-md rounded-md">
+        <h2 className="text-3xl font-bold mb-6">Venta Details</h2>
 
-          <div className="mb-6">
-            <label
-              htmlFor="image"
-              className="block text-sm font-medium text-gray-600"
-            >
-              Agregar una imagen
-            </label>
-            <input
-              type="file"
-              id="image"
-              name="image"
-              value={image}
-              onChange={handleImageChange}
-              accept="image/"
-              className="mt-1 p-2 w-full border-b-2 border-green-500 focus:outline-none focus:border-green-700"
-            />
-          </div>
-          <Link
-            type="button"
-            className="bg-blue-500 ml-10 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
-            href="/"
-          >
-            Volver
-          </Link>
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-600">
+            Venta Number
+          </label>
+          <input
+            type="text"
+            className="form-input mt-1 block w-full px-4 py-2 border rounded-md bg-white focus:outline-none focus:border-blue-500"
+            value={ventaNumber}
+            onChange={(e) => setVentaNumber(e.target.value)}
+          />
+        </div>
 
-          <button
-            type="button"
-            className="bg-blue-500 ml-10 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
-            // onClick={() => router.push("/")}
-          >
-            Agregar
-          </button>
-        </form>
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-600">
+            Client
+          </label>
+          <input
+            type="text"
+            className="form-input mt-1 block w-full px-4 py-2 border rounded-md bg-white focus:outline-none focus:border-blue-500"
+            value={client}
+            onChange={(e) => setClient(e.target.value)}
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-600">
+            Seller
+          </label>
+          <input
+            type="text"
+            className="form-input mt-1 block w-full px-4 py-2 border rounded-md bg-white focus:outline-none focus:border-blue-500"
+            value={seller}
+            onChange={(e) => setSeller(e.target.value)}
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-600">
+            Purchase Date
+          </label>
+          <input
+            type="text"
+            className="form-input mt-1 block w-full px-4 py-2 border rounded-md bg-white focus:outline-none focus:border-blue-500"
+            value={purchaseDate}
+            onChange={(e) => setPurchaseDate(e.target.value)}
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-600">
+            Product List
+          </label>
+          <ul className="list-disc list-inside">
+            <button
+              type="button"
+              onClick={handleProductAdd}
+              className="text-blue-500"
+            >
+              Add Product
+            </button>
+          </ul>
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-600">
+            Total Sale
+          </label>
+          <input
+            type="text"
+            className="form-input mt-1 block w-full px-4 py-2 border rounded-md bg-white focus:outline-none focus:border-blue-500"
+            value={totalSale}
+            onChange={(e) => setTotalSale(e.target.value)}
+          />
+        </div>
+
+        <button
+          onClick={handleSubmit}
+          className="bg-blue-500 text-white px-4 py-2 rounded-md"
+        >
+          Submit
+        </button>
       </div>
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Product List Modal"
+      >
+        <h2 className="text-2xl font-bold mb-4">Product List</h2>
+        <div className="flex flex-wrap justify-center">
+          {productList.map((product, index) => (
+            <div
+              key={product.id}
+              className="flex-shrink-0 bg-white p-4 rounded-md shadow-md flex flex-col items-center m-2"
+              style={{ width: "150px" }}
+            >
+              <img
+                src={product.imageUrl}
+                alt={product.nombre}
+                className="mb-2 rounded-md"
+                style={{ width: "100%", height: "100px", objectFit: "cover" }}
+              />
+              <p className="text-lg font-semibold">{product.nombre}</p>
+              <button
+                onClick={() => handleProductSelect(product)}
+                className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md"
+              >
+                Add
+              </button>
+            </div>
+          ))}
+        </div>
+        <button
+          onClick={closeModal}
+          className="bg-blue-500 text-white px-4 py-2 rounded-md mt-4"
+        >
+          Close
+        </button>
+      </Modal>
     </main>
   );
 };
 
-export default venta;
+export default Venta;
+
+// pages/venta.js
+// import React from 'react';
+
+// const VentaPage = ({ ventaData }) => {
+//   return (
+//     <div className="container mx-auto my-8 p-8 bg-gray-100 shadow-md rounded-md">
+//       <h2 className="text-3xl font-bold mb-6">Venta Details</h2>
+
+//       <div className="mb-4">
+//         <label className="block text-sm font-medium text-gray-600">Venta Number</label>
+//         <input type="text" className="form-input mt-1 block w-full" value={ventaData.nroVenta} readOnly />
+//       </div>
+
+//       <div className="mb-4">
+//         <label className="block text-sm font-medium text-gray-600">Client</label>
+//         <input type="text" className="form-input mt-1 block w-full" value={ventaData.cliente} readOnly />
+//       </div>
+
+//       <div className="mb-4">
+//         <label className="block text-sm font-medium text-gray-600">Seller</label>
+//         <input type="text" className="form-input mt-1 block w-full" value={ventaData.vendedor} readOnly />
+//       </div>
+
+//       <div className="mb-4">
+//         <label className="block text-sm font-medium text-gray-600">Purchase Date</label>
+//         <input type="text" className="form-input mt-1 block w-full" value={ventaData.fchCompra} readOnly />
+//       </div>
+
+//       <div className="mb-4">
+//         <label className="block text-sm font-medium text-gray-600">Product List</label>
+//         <ul className="list-disc list-inside">
+//           {ventaData.listaProductos.map((producto, index) => (
+//             <li key={index}>{producto.nombre}</li>
+//           ))}
+//         </ul>
+//       </div>
+
+//       <div className="mb-4">
+//         <label className="block text-sm font-medium text-gray-600">Total Sale</label>
+//         <input type="text" className="form-input mt-1 block w-full" value={ventaData.totalVenta} readOnly />
+//       </div>
+
+//       <button className="bg-blue-500 text-white px-4 py-2 rounded-md">Submit</button>
+//     </div>
+//   );
+// };
+
+// export default VentaPage;
+
+// // Puedes obtener los datos de la venta desde tu backend y pasarlos como props a esta página
+// VentaPage.getInitialProps = async () => {
+//   // Simula obtener datos desde tu API o base de datos
+//   const ventaData = {
+//     nroVenta: 1,
+//     cliente: 'Nombre del Cliente',
+//     vendedor: 'Nombre del Vendedor',
+//     fchCompra: '2023-12-12',
+//     listaProductos: [{ nombre: 'Producto 1' }, { nombre: 'Producto 2' }],
+//     totalVenta: 1000,
+//   };
+
+//   return { ventaData };
+// };

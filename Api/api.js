@@ -1,17 +1,134 @@
-const URL = "http://localhost:5000/"
+const URL = "http://localhost:5000/";
 
 const logIn = async (name, password) => {
   try {
     const response = await fetch(`${URL}vendedor/LogIn`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, password }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(data);
+
+    if (data.nroVendedor) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error(`Error en la función logIn: ${error.message}`);
+    return false;
+  }
+};
+const VentaRegister = async (
+  nroVenta,
+  totalVenta,
+  fchCompra,
+  nroVendedor,
+  cliente
+) => {
+  try {
+    const response = await fetch(`${URL}Venta`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: name,
-        password: password,
+        nroVenta,
+        productList,
+        totalVenta,
+        fchCompra,
+        nroVendedor,
+        cliente,
       }),
     });
+
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.status}`);
+    }
+    if (response.authenticated) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error(`An error has ocurred in Venta: ${error.message}`);
+    return false;
+  }
+};
+
+const ProductRegister = async (
+  codProd,
+  nombre,
+  descripcion,
+  precio,
+  cantStock,
+  imageUrl
+) => {
+  try {
+    const response = await fetch(`${URL}products`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+       "codProd": codProd,
+        "nombre" : nombre,
+        "descripcion" :descripcion,
+         "precio" :precio,
+        "cantStock" :cantStock,
+        "imageUrl":imageUrl
+      }),
+    });
+   
+
+    if (response.ok) {
+      const responseBody = await response.json();
+      console.log("Response body:", responseBody);
+
+      if (responseBody.codProd) {
+        console.log("Registro exitoso");
+        return true;
+      } else {
+        console.log("Registro fallido");
+        return false;
+      }
+    } else {
+      console.error("Error en la solicitud:", response.status);
+      return false;
+    }
+  } catch (error) {
+    console.error(`An error has ocurred in Producto: ${error.message}`);
+    return false;
+  }
+};
+
+const ClientRegister = async (name, address, phone, date) => {
+  try {
+    if (date != "") {
+      const response = await fetch(`${URL}Clientes`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, address, phone }),
+      });
+    } else {
+      const response = await fetch(`${URL}Clientes`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, address, phone, date }),
+      });
+    }
 
     console.log("Response status:", response.status);
 
@@ -36,26 +153,13 @@ const logIn = async (name, password) => {
   }
 };
 
-
-
-const ClientRegister = async (name, address, phone, date) => {
+const getAllProducts = async () => {
   try {
-    let url = `${URL}clientes/regular`;
-    if (date !== "") {
-      url = `${URL}clientes/vip`;
-    }
-
-    const response = await fetch(url, {
-      method: "POST",
+    const response = await fetch(`${URL}products`, {
+      method: `GET`,
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        nombre: name,
-        direccion: address,
-        telefono: parseInt(phone),
-        fchIngreso: date,
-      }),
     });
 
     console.log("Response status:", response.status);
@@ -78,26 +182,6 @@ const ClientRegister = async (name, address, phone, date) => {
   } catch (error) {
     console.error(`An error has occurred in ClientRegister: ${error.message}`);
     return false;
-  }
-};
-
-
-
-const getAllProducts = async () => {
-  try{
-  const response = await fetch(`${URL}products`, {
-    method: "GET",
-
-  });
-    if (!response.ok) {
-      throw new Error(`La solicitud falló  ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data.data;  
-  } catch (error) {
-    console.error(`Error en la función: ${error.message}`);
-    throw error; 
   }
 };
 
