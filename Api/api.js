@@ -259,53 +259,25 @@ const getProduct = (codProd) => {
   });
 };
 
-const deleteProduct = (codProd, setMsg, setSucces, setListaProductos) => {
-  fetch(`${URL}products/${codProd}`, {
-    method: `DELETE`,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`La solicitud fallo: ${response.status}`);
-      }
-      return response.text();
+const getClient = (idCli) => {
+  return new Promise((resolve, reject) => {
+    fetch(`${URL}clientes/${idCli}`, {
+      method: `GET`,
     })
-    .then((data) => {
-      setMsg(data);
-      setSucces(true);
-      ListaProductos(setListaProductos);
-      console.log(`data`, data);
-    })
-    .catch((error) => {
-      setMsg(error);
-      setSucces(false);
-      console.log(`Fetch error:`, error);
-    });
-};
-
-const updateProduct = async (updatedProductData) => {
-  try {
-    const response = await fetch(`${URL}/products`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedProductData),
-    });
-
-    if (!response.ok) {
-      throw new Error(`La solicitud PUT falló con código ${response.status}`);
-    }
-
-    const updatedProduct = await response.json();
-    console.log("Producto actualizado:", updatedProduct);
-    return updatedProduct;
-  } catch (error) {
-    console.error(`Error al actualizar el producto: ${error.message}`);
-    throw error;
-  }
+      .then((response) => {
+        if (!response.ok) {
+          const errorMessage = `La solicitud falló con código: ${response.status}`;
+          reject(errorMessage);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        resolve(data);
+      })
+      .catch((error) => {
+        reject(error.message || "Error desconocido");
+      });
+  });
 };
 
 const VentaPorCliente = async (id) => {
@@ -332,12 +304,10 @@ export {
   getAllProducts,
   ClientRegister,
   getProduct,
-  deleteProduct,
-  updateProduct,
   ProductRegister,
   VentaRegister,
-  getAllClientsRegular,
   getAllClientsVip,
+  getAllClientsRegular,
   deleteClient,
-  VentaPorCliente,
+  getClient,
 };

@@ -5,6 +5,7 @@ import { getAllClientsVip, getAllClientsRegular } from "../../Api/api";
 import { useState, useEffect } from "react";
 import clientes from "../Clientes/page";
 import { deleteClient } from "../../Api/api";
+import Link from "@/node_modules/next/link";
 
 const AllClientsPage = () => {
   const router = useRouter([]);
@@ -49,6 +50,7 @@ const AllClientsPage = () => {
     fetchVipClients();
     fetchRegularClients();
   }, []);
+
   const handleRegularClientDelete = async (id) => {
     try {
       const response = await deleteClient(id, false);
@@ -83,6 +85,12 @@ const AllClientsPage = () => {
     } catch (error) {
       console.error(`Error al eliminar el cliente VIP: ${error.message}`);
     }
+  };
+  const handleClientClick = (clientId) => {
+  
+      sessionStorage.setItem("idCli", clientId.toString());
+      router.push(`/UpdateClient/${clientId}`);
+    
   };
 
   return (
@@ -129,8 +137,11 @@ const AllClientsPage = () => {
                 <strong>Fecha de Ingreso:</strong> {client.fchIngreso}
               </div>
               <div>
-                <button
-                  onClick={() => handleVipClick(client.idCli)}
+              <Link
+                  onClick={() => {
+                    sessionStorage.setItem("idCli", client.idCli.toString());
+                  }}
+                  href="/UpdateClient"
                   style={{
                     color: "black",
                     backgroundColor: "yellow",
@@ -142,7 +153,7 @@ const AllClientsPage = () => {
                   }}
                 >
                   Editar
-                </button>
+                </Link>
                 <button
                   onClick={() => handleVipClientDelete(client.idCli)}
                   style={{
@@ -201,8 +212,11 @@ const AllClientsPage = () => {
                 <strong>id:</strong> {client.idCli} -
               </div>
               <div>
-                <button
-                  onClick={() => handleRegularClick(client.idCli)}
+                <Link
+                  onClick={() => {
+                    sessionStorage.setItem("idCli", client.idCli.toString());
+                  }}
+                  href="/UpdateClient"
                   style={{
                     color: "black",
                     backgroundColor: "yellow",
@@ -214,7 +228,7 @@ const AllClientsPage = () => {
                   }}
                 >
                   Editar
-                </button>
+                </Link>
                 <button
                   onClick={() => handleRegularClientDelete(client.idCli)}
                   style={{
