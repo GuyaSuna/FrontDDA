@@ -222,7 +222,7 @@ const deleteProduct = (codProd, setMsg, setSucces, setListaProductos) => {
 
 const updateProduct = async (updatedProductData) => {
   try {
-    const response = await fetch(`${URL}/products`, {
+    const response = await fetch(`${URL}products`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

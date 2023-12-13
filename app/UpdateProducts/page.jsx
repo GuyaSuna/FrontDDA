@@ -3,18 +3,19 @@
 import { useRouter } from 'next/navigation';
 import React from 'react'
 import {updateProduct} from "../../Api/api";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const updateProducts = () => {
-    const router = useRouter();
+  const router = useRouter();
 
   const [imageUrl, setImage] = useState("");
   const [cantStock, setStock] = useState("");
-  const [precio, setPrice] = useState("");
+  const [precio, setPrecio] = useState("");
   const [descripcion, setDescription] = useState("");
   const [nombre, setNombre] = useState("");
-  const [codProd, setCodPro] = useState("");
-
+  const [codProd, setCodProd] = useState("");
+  const [product, setProductDetails] = useState([]);
+  console.log('Producto detail: '+setProductDetails);
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
   };
@@ -23,19 +24,13 @@ const updateProducts = () => {
     setNombre(e.target.value);
   };
 
-  const handlePriceChange = (e) => {
-    setPrice(e.target.value);
+  const handlePrecioChange = (e) => {
+    setPrecio(e.target.value);
   };
 
   const handleStockChange = (e) => {
     setStock(e.target.value);
   };
-
-  const handleCodProChange = (e) => {
-    const newValue = e.target.value.toString();
-    setCodPro(newValue);
-  };
-
   const handleImageChange = (e) => {
     const file = e.target.files[0];
 
@@ -63,7 +58,47 @@ const updateProducts = () => {
         }
       };
 
-
+      useEffect(() => {
+        setCodProd(sessionStorage.getItem('codProd'));
+         console.log('Código del producto:', codProd);
+       }, []);
+     
+     
+       useEffect(() => {
+        if (codProd) {
+          const fetchProductDetails = async () => {
+            try {
+              const details = await getProduct(codProd);
+              setProductDetails(details);
+            } catch (error) {
+              console.error("Error al cargar detalles del producto:", error);
+            }
+          };
+    
+          fetchProductDetails();
+        }
+      }, [codProd]);
+      //  useEffect(() => {
+      //   if (codProd) {
+      //     const fetchUpdateProduct = async () => {
+      //       try {
+      //         // Aquí deberías obtener los detalles del producto, no realizar la actualización
+      //         const productDetails = await getProduct(codProd); // Necesitas implementar esta función
+      //         // Ahora, puedes actualizar los estados con los detalles del producto
+      //         setNombre(productDetails.nombre);
+      //         setDescription(productDetails.descripcion);
+      //         setPrecio(productDetails.precio);
+      //         setStock(productDetails.cantStock);
+      //         setImage(productDetails.imageUrl);
+      //       } catch (error) {
+      //         console.error('Error al cargar detalles del producto:', error);
+      //       }
+      //     };
+    
+      //     fetchUpdateProduct();
+      //   }
+      // }, [codProd]);
+    
   return (
     <main className="h-screen flex items-center justify-center bg-gray-900">
       <div className="bg-white p-8 rounded-lg shadow-md w-96 text-gray-800">
@@ -78,7 +113,6 @@ const updateProducts = () => {
               id="codProd"
               name="codPro"
               value={codProd}
-              onChange={handleCodProChange}
               className="mt-1 p-2 w-full border-b-2 border-blue-500 focus:outline-none focus:border-blue-700"
             />
           </div>
@@ -117,7 +151,7 @@ const updateProducts = () => {
               id="price"
               name="price"
               value={precio}
-              onChange={handlePriceChange}
+              onChange={handlePrecioChange}
               className="mt-1 p-2 w-full border-b-2 border-blue-500 focus:outline-none focus:border-blue-700"
             />
           </div>
