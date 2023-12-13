@@ -13,7 +13,7 @@ const updateProducts = () => {
   const [precio, setPrecio] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [nombre, setNombre] = useState("");
-  const [codProd, setCodProd] = useState("");
+  const [codProd, setCodProd] = useState();
   const [product, setProductDetails] = useState([]);
   
   const handleDescripcionChange = (e) => {
@@ -39,23 +39,26 @@ const updateProducts = () => {
       setImage(imageUrl);
     }
   };
-    const handleUpdateProduct = async () => {
-        const codProd = 1; 
-        const updatedProductData = {
-          nombre,
-          descripcion,
-          precio,
-          cantStock,
-          imageUrl, 
-        };
-      
-        try {
-          await updateProduct(codProd, updatedProductData);
-          console.log('Producto actualizado con éxito');
-        } catch (error) {
-          console.error('Error al actualizar el producto:', error);
-        }
+  const handleUpdateProduct = async () => {
+    if (codProd !== null) {
+      const updatedProductData = {
+        nombre: nombre,
+        descripcion: descripcion,
+        precio: precio,
+        cantStock: cantStock,
+        imageUrl: imageUrl,
       };
+  
+      try {
+        await updateProduct(codProd, updatedProductData);
+        console.log('Producto actualizado con éxito');
+      } catch (error) {
+        console.error('Error al actualizar el producto:', error);
+      }
+    } else {
+      console.error('Error: Código del producto no disponible');
+    }
+  };
 
       useEffect(() => {
         setCodProd(sessionStorage.getItem('codProd'));
@@ -83,27 +86,7 @@ const updateProducts = () => {
           fetchProductDetails();
         }
       }, [codProd]);
-      //  useEffect(() => {
-      //   if (codProd) {
-      //     const fetchUpdateProduct = async () => {
-      //       try {
-      //         // Aquí deberías obtener los detalles del producto, no realizar la actualización
-      //         const productDetails = await getProduct(codProd); // Necesitas implementar esta función
-      //         // Ahora, puedes actualizar los estados con los detalles del producto
-      //         setNombre(productDetails.nombre);
-      //         setDescription(productDetails.descripcion);
-      //         setPrecio(productDetails.precio);
-      //         setStock(productDetails.cantStock);
-      //         setImage(productDetails.imageUrl);
-      //       } catch (error) {
-      //         console.error('Error al cargar detalles del producto:', error);
-      //       }
-      //     };
-    
-      //     fetchUpdateProduct();
-      //   }
-      // }, [codProd]);
-    
+      
   return (
     <main className="h-screen flex items-center justify-center bg-gray-900">
       <div className="bg-white p-8 rounded-lg shadow-md w-96 text-gray-800">

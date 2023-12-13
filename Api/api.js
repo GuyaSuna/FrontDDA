@@ -231,8 +231,10 @@ const updateProduct = async (updatedProductData) => {
     });
 
     if (!response.ok) {
-      throw new Error(`La solicitud PUT falló con código ${response.status}`);
+      const errorResponse = await response.json();
+      throw new Error(`La solicitud PUT falló con código ${response.status}. Detalles: ${JSON.stringify(errorResponse)}`);
     }
+    
 
     const updatedProduct = await response.json();
     console.log('Producto actualizado:', updatedProduct);
