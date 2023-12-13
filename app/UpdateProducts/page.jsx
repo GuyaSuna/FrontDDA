@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import React from 'react'
-import {updateProduct} from "../../Api/api";
+import {updateProduct, getProduct} from "../../Api/api";
 import { useState, useEffect } from "react";
 
 const updateProducts = () => {
@@ -11,15 +11,14 @@ const updateProducts = () => {
   const [imageUrl, setImage] = useState("");
   const [cantStock, setStock] = useState("");
   const [precio, setPrecio] = useState("");
-  const [descripcion, setDescription] = useState("");
+  const [descripcion, setDescripcion] = useState("");
   const [nombre, setNombre] = useState("");
   const [codProd, setCodProd] = useState("");
   const [product, setProductDetails] = useState([]);
-  console.log('Producto detail: '+setProductDetails);
-  const handleDescriptionChange = (e) => {
-    setDescription(e.target.value);
+  
+  const handleDescripcionChange = (e) => {
+    setDescripcion(e.target.value);
   };
-
   const handleNombreChange = (e) => {
     setNombre(e.target.value);
   };
@@ -69,6 +68,12 @@ const updateProducts = () => {
           const fetchProductDetails = async () => {
             try {
               const details = await getProduct(codProd);
+              console.log(details)
+              setNombre(details.nombre);
+              setDescripcion(details.descripcion);
+              setPrecio(details.precio);
+              setStock(details.cantStock);
+              setImage(details.imageUrl);
               setProductDetails(details);
             } catch (error) {
               console.error("Error al cargar detalles del producto:", error);
@@ -138,7 +143,7 @@ const updateProducts = () => {
               id="description"
               name="description"
               value={descripcion}
-              onChange={handleDescriptionChange}
+              onChange={handleDescripcionChange}
               className="mt-1 p-2 w-full border-b-2 border-blue-500 focus:outline-none focus:border-blue-700"
             />
           </div>
