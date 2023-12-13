@@ -34,9 +34,13 @@ const allProducts = () => {
       console.error(`Error fetching data: ${error.message}`);
     }
   };
+  // const handleDetail = codProd => {
+  //   console.log("Código del producto:", codProd);
+  //   router.push(`/DetailProduct/?codProd=1`);
+  // };
   const handleDetail = codProd => {
     console.log("Código del producto:", codProd);
-    router.push(`/DetailProduct?codProd=1`);
+    router.push(`/DetailProduct/?codProd=${codProd}`);
   };
   useEffect(() => {
     fetchData();
@@ -87,12 +91,9 @@ const allProducts = () => {
                   </span>
                 </a>
               </div>
-              
             </div>
           </div>
         </div>
-     
-
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-3 gap-6.5 m-3">
         {products &&
           products.map(product => (

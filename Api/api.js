@@ -3,7 +3,7 @@ const URL = "http://localhost:5000/";
 const logIn = async (name, password) => {
   try {
     const response = await fetch(`${URL}vendedor/LogIn`, {
-      method: "POST",
+      method: `POST`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -161,34 +161,22 @@ const getAllProducts = async () => {
         "Content-Type": "application/json",
       },
     });
-
-    console.log("Response status:", response.status);
-
-    if (response.ok) {
-      const responseBody = await response.json();
-      console.log("Response body:", responseBody);
-
-      if (responseBody.idCli) {
-        console.log("Registro exitoso");
-        return true;
-      } else {
-        console.log("Registro fallido");
-        return false;
-      }
-    } else {
-      console.error("Error en la solicitud:", response.status);
-      return false;
+    if (!response.ok) {
+      throw new Error(`La solicitud falló  ${response.status}`);
     }
+
+    const data = await response.json();
+    return data.data;
   } catch (error) {
-    console.error(`An error has occurred in ClientRegister: ${error.message}`);
-    return false;
+    console.error(`Error en la función: ${error.message}`);
+    throw error;
   }
 };
 
 const getProduct = codProd => {
   return new Promise((resolve, reject) => {
     fetch(`${URL}products/${codProd}`, {
-      method: "GET",
+      method: `GET`,
     })
       .then(response => {
         if (!response.ok) {
@@ -206,7 +194,7 @@ const getProduct = codProd => {
   });
 };
 
-const deleteProdct = (codProd, setMsg, setSucces, setListaProductos) => {
+const deleteProduct = (codProd, setMsg, setSucces, setListaProductos) => {
   fetch(`${URL}products/${codProd}`,{
       method: `DELETE`,
       headers: {
@@ -261,6 +249,8 @@ export{
   getAllProducts,
   ClientRegister,
   getProduct,
-  deleteProdct,
-  updateProduct
+  deleteProduct,
+  updateProduct,
+  ProductRegister,
+  VentaRegister
 } ;
