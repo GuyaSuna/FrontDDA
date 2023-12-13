@@ -28,7 +28,7 @@ const UpdateClient = () => {
       const fetchProductDetails = async () => {
         try {
           const details = await getClient(idCli);
-          console.log(details);
+          console.log("detail", details);
           setClientName(details.nombre);
           setClientDirection(details.direccion);
           setClientPhone(details.telefono);
@@ -36,8 +36,8 @@ const UpdateClient = () => {
             setClientDate(details.fchIngreso);
             setEsVip(true);
           }
-
           setClient(details);
+          console.log("detail", details);
         } catch (error) {
           console.error("Error al cargar detalles del producto:", error);
         }
@@ -53,13 +53,13 @@ const UpdateClient = () => {
   const handleClientUpdate = async (e) => {
     e.preventDefault();
     try {
-      const success = await updateClient(client.idCli, {
-        nombre: clientName,
-        direccion: clientDirection,
-        telefono: clientPhone,
-        fchIngreso: clientDate,
-      });
-
+      const success = await updateClient(
+        client.idCli,
+        clientName,
+        clientDirection,
+        clientPhone,
+        clientDate
+      );
       if (success) {
         router.push("/AllClients");
       } else {
