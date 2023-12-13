@@ -1,13 +1,12 @@
 "use client";
 
-import React from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
+import React from 'react'
+import {updateProduct} from "../../Api/api";
 import { useState } from "react";
-import Link from "next/link";
-import { ProductRegister } from "../../Api/api";
 
-const ProductPage = () => {
-  const router = useRouter();
+const updateProducts = () => {
+    const router = useRouter();
 
   const [imageUrl, setImage] = useState("");
   const [cantStock, setStock] = useState("");
@@ -46,30 +45,24 @@ const ProductPage = () => {
       setImage(imageUrl);
     }
   };
+    const handleUpdateProduct = async () => {
+        const codProd = 1; 
+        const updatedProductData = {
+          nombre,
+          descripcion,
+          precio,
+          cantStock,
+          imageUrl, 
+        };
+      
+        try {
+          await updateProduct(codProd, updatedProductData);
+          console.log('Producto actualizado con éxito');
+        } catch (error) {
+          console.error('Error al actualizar el producto:', error);
+        }
+      };
 
-  const handleProductRegister = async (e) => {
-    e.preventDefault();
-    console.log("ABRRRRRRRRRRRRR");
-
-    try {
-      const success = await ProductRegister(
-        codProd,
-        nombre,
-        descripcion,
-        precio,
-        cantStock,
-        imageUrl
-      );
-
-      if (success) {
-        router.push("/AllProducts");
-      } else {
-        console.log("Registro fallido");
-      }
-    } catch (error) {
-      console.error("Error durante el registro:", error);
-    }
-  };
 
   return (
     <main className="h-screen flex items-center justify-center bg-gray-900">
@@ -162,18 +155,17 @@ const ProductPage = () => {
           >
             Volver
           </button>
-
           <button
             type="button"
             className="bg-blue-500 ml-10 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
-            onClick={handleProductRegister}
+            onClick={handleUpdateProduct}
           >
-            Agregar
+            Modificar
           </button>
         </form>
       </div>
     </main>
-  );
-};
+  )
+}
 
-export default ProductPage;
+export default updateProducts

@@ -1,17 +1,30 @@
 "use client";
-import React from 'react'
-import { useEffect } from 'react';
-import { useState } from 'react'
-import {getAllProducts} from '../../Api/api';
-// import Card from "react-bootstrap/Card";
-// import Col from "react-bootstrap/Col";
-// import Row from "react-bootstrap/Row";
+import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import { getAllProducts } from "../../Api/api";
+import Cookies from "js-cookie";
+
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Button } from "react-bootstrap";
 
 const allProducts = () => {
+  const router = useRouter();
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
   const [searchFiltered, setSearchFiltered] = useState(products);
 
+  const links = [
+    {
+      label: "DetailProduct",
+      route: "./DetailProduct",
+    },
+    {
+      label: "Productos",
+      route: "./Productos",
+    },
+  ];
   const fetchData = async () => {
     try {
       const data = await getAllProducts();
@@ -22,32 +35,67 @@ const allProducts = () => {
     }
   };
 
+  const handleDetail = (codProd) => {
+    console.log("Código del producto:", codProd);
+    sessionStorage.setItem("codProd", codProd);
+    router.push("/DetailProduct");
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
-  // useEffect (()=>{
-  //     if(search === ""){
-  //         setSearchFiltered(products);
-  //     }else{
-  //         const searchFiltered = products.filter((product)=>
-  //         product.name.toLowerCase().includes(search.toLowerCase())
-  //         );
-  //         setSearchFiltered(searchFiltered);
-  //     }
-  // },[products, search]);
-  // const handleChange = (event) =>{
-  //     setSearch(event.target.value);
-  // };
-
-  // const handleClick = (event, id)=>{
-  //     event.preventDefault();
-  //     Navigation(`/details/${id}`)
-  // }
+  const styles = {
+    body: {
+      fontFamily: "'Poppins', sans-serif",
+    },
+    hoverWFull: {
+      width: "100%",
+    },
+    groupHoverWFull: {
+      width: "100%",
+    },
+    groupHoverInlineBlock: {
+      display: "inline-block",
+    },
+    groupHoverFlexGrow: {
+      flexGrow: 1,
+    },
+  };
   return (
-    
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-3 gap-6.5 m-3">
+    <>
+      <div className="w-full max-w-md mx-auto">
+        <div className="px-7 bg-white shadow-lg rounded-2xl">
+          <div className="flex">
+            <div className="flex-1 group">
+              <a
+                href="/Productos"
+                className="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500"
+              >
+                <span className="block px-1 pt-1 pb-1">
+                  <i className="far fa-home text-2xl pt-1 mb-1 block" />
+                  <span className="block text-xs pb-2">Agregar Producto</span>
+                  <span className="block w-5 mx-auto h-1 group-hover:bg-indigo-500 rounded-full" />
+                </span>
+              </a>
+            </div>
+            <div className="flex-1 group">
+              <a
+                href="#"
+                className="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500"
+              >
+                <span className="block px-1 pt-1 pb-1">
+                  <i className="far fa-compass text-2xl pt-1 mb-1 block" />
+                  <span className="block text-xs pb-2">Explore</span>
+                  <span className="block w-5 mx-auto h-1 group-hover:bg-indigo-500 rounded-full" />
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-3 gap-6.5 m-3">
         {products &&
-          products.map(product => (
+          products.map((product) => (
             <div
               key={product.codProd}
               className="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md"
@@ -72,20 +120,26 @@ const allProducts = () => {
                   {product.description}
                 </p>
               </div>
-              <div className="p-6 pt-0 " >
-                <button
-                  className="block w-full select-none rounded-lg text-gray-700 shadow-md bg-blue-gray-900/10 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-blue-gray-900 transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              <div className="p-6 pt-0">
+                <Link
+                  className="block w-full select-none rounded-lg bg-blue-gray-900/10 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-blue-gray-900 transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                   type="button"
+                  onClick={() => {
+                    sessionStorage.setItem(
+                      "codProd",
+                      product.codProd.toString()
+                    );
+                  }}
+                  href={`/DetailProduct`}
                 >
                   Ver detalle
-                </button>
+                </Link>
               </div>
             </div>
           ))}
       </div>
-    
+    </>
   );
 };
 
 export default allProducts;
- 

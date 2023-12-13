@@ -28,7 +28,7 @@ const Sidebar = () => {
           <div className="flex items-center  justify-center md:justify-center md:w-full   bg-blue-900 dark:bg-gray-900 border-none">
             <img
               className="w-14 h-14 md:w-24 md:h-24 mr-2 rounded-full overflow-hidden mt-10"
-              src="https://thumbs.dreamstime.com/b/icono-gris-de-perfil-usuario-s%C3%ADmbolo-empleado-avatar-web-y-dise%C3%B1o-ilustraci%C3%B3n-signo-aislado-en-fondo-blanco-191067342.jpg"
+              src="https://media.licdn.com/dms/image/C5603AQG2FNXYCpKj2Q/profile-displayphoto-shrink_400_400/0/1619473078862?e=2147483647&v=beta&t=eG8gjOGxMvUFFwggd7aY-jDXQCbJIBPzv-I42FJ9QdU"
             />
             <span className="hidden md:block text-white">ADMIN</span>
           </div>
@@ -41,7 +41,7 @@ const Sidebar = () => {
           </div>
         </li>
         <li>
-          <a
+          <Link
             href="/"
             className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
           >
@@ -62,7 +62,7 @@ const Sidebar = () => {
               </svg>
             </span>
             <span className="ml-2 text-sm tracking-wide truncate">Inicio</span>
-          </a>
+          </Link>
         </li>
         <li>
           <Link
@@ -92,7 +92,7 @@ const Sidebar = () => {
         </li>
         <li>
           <Link
-            href="/AllProducts"
+            href="/Productos"
             className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
           >
             <span className="inline-flex justify-center items-center ml-4">
@@ -111,7 +111,9 @@ const Sidebar = () => {
                 />
               </svg>
             </span>
-            <span className="ml-2 text-sm tracking-wide truncate">Ventas</span>
+            <span className="ml-2 text-sm tracking-wide truncate">
+              Alta Productos
+            </span>
           </Link>
         </li>
         <li>
@@ -141,8 +143,8 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          <a
-            href="#"
+          <Link
+            href="Venta"
             className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
           >
             <span className="inline-flex justify-center items-center ml-4">
@@ -161,10 +163,8 @@ const Sidebar = () => {
                 />
               </svg>
             </span>
-            <span className="ml-2 text-sm tracking-wide truncate">
-              Vendedores
-            </span>
-          </a>
+            <span className="ml-2 text-sm tracking-wide truncate">Venta</span>
+          </Link>
         </li>
       </ul>
     </div>

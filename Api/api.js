@@ -1,25 +1,98 @@
-const URL = "http://localhost:5000/"
+const URL = "http://localhost:5000/";
 
 const logIn = async (name, password) => {
   try {
     const response = await fetch(`${URL}vendedor/LogIn`, {
-      method: 'POST',
+      method: `POST`,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, password }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(data);
+
+    if (data.nroVendedor) {
+      return data;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error(`Error en la función logIn: ${error.message}`);
+    return false;
+  }
+};
+const VentaRegister = async (
+  nroVenta,
+  totalVenta,
+  fchCompra,
+  nroVendedor,
+  cliente
+) => {
+  try {
+    const response = await fetch(`${URL}Venta`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: name,
-        password: password,
+        nroVenta,
+        productList,
+        totalVenta,
+        fchCompra,
+        nroVendedor,
+        cliente,
       }),
     });
 
-    console.log("Response status:", response.status);
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.status}`);
+    }
+    if (response.authenticated) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error(`An error has ocurred in Venta: ${error.message}`);
+    return false;
+  }
+};
+
+const ProductRegister = async (
+  codProd,
+  nombre,
+  descripcion,
+  precio,
+  cantStock,
+  imageUrl
+) => {
+  try {
+    const response = await fetch(`${URL}products`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        codProd: codProd,
+        nombre: nombre,
+        descripcion: descripcion,
+        precio: precio,
+        cantStock: cantStock,
+        imageUrl: imageUrl,
+      }),
+    });
 
     if (response.ok) {
       const responseBody = await response.json();
       console.log("Response body:", responseBody);
 
-      if (responseBody.nroVendedor) {
+      if (responseBody.codProd) {
         console.log("Registro exitoso");
         return true;
       } else {
@@ -31,12 +104,10 @@ const logIn = async (name, password) => {
       return false;
     }
   } catch (error) {
-    console.error(`An error has occurred in ClientRegister: ${error.message}`);
+    console.error(`An error has ocurred in Producto: ${error.message}`);
     return false;
   }
 };
-
-
 
 const ClientRegister = async (name, address, phone, date) => {
   try {
@@ -81,28 +152,182 @@ const ClientRegister = async (name, address, phone, date) => {
   }
 };
 
+const getAllClientsVip = async () => {
+  try {
+    const url = `${URL}clientes/vip`;
+    const response = await fetch(url, {
+      method: `GET`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-     
-const getAllProducts = async () => {
-  try{
-  const response = await fetch(`${URL}products`, {
-    method: "GET",
-
-  });
     if (!response.ok) {
-      throw new Error(`La solicitud falló con código ${response.status}`);
+      throw new Error(`La solicitud falló  ${response.status}`);
     }
 
     const data = await response.json();
-    return data.data;  
+    return data.data;
   } catch (error) {
-    console.error(`Error en la función: ${error.message}`);
-    throw error; 
+    console.error(`Error en la función getAllClientsVip: ${error.message}`);
+    throw error;
   }
 };
-  
-export{
+
+const getAllClientsRegular = async () => {
+  try {
+    const url = `${URL}clientes/regular`;
+    const response = await fetch(url, {
+      method: `GET`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`La solicitud falló  ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.error(`Error en la función getAllClientsRegular: ${error.message}`);
+    throw error;
+  }
+};
+
+const deleteClient = async (id) => {
+  console.log(id);
+  try {
+    const url = `${URL}clientes/${id}`;
+    const response = await fetch(url, {
+      method: `DELETE`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (response.ok) {
+      console.log(`Cliente  eliminado con éxito: ${id}`);
+      return true;
+    } else {
+      console.error(`No se pudo eliminar el cliente: ${id}`);
+      return false;
+    }
+  } catch (error) {
+    console.error(`Error al eliminar el cliente: ${error.message}`);
+  }
+};
+
+const getAllProducts = async () => {
+  try {
+    const response = await fetch(`${URL}products`, {
+      method: `GET`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`La solicitud falló  ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.error(`Error en la función: ${error.message}`);
+    throw error;
+  }
+};
+
+const getProduct = (codProd) => {
+  return new Promise((resolve, reject) => {
+    fetch(`${URL}products/${codProd}`, {
+      method: `GET`,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          const errorMessage = `La solicitud falló con código: ${response.status}`;
+          reject(errorMessage);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        resolve(data);
+      })
+      .catch((error) => {
+        reject(error.message || "Error desconocido");
+      });
+  });
+};
+
+const getClient = (idCli) => {
+  return new Promise((resolve, reject) => {
+    fetch(`${URL}clientes/${idCli}`, {
+      method: `GET`,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          const errorMessage = `La solicitud falló con código: ${response.status}`;
+          reject(errorMessage);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        resolve(data);
+      })
+      .catch((error) => {
+        reject(error.message || "Error desconocido");
+      });
+  });
+};
+const updateClient = async (idCli, nombre, direccion, telefono, fchIngreso) => {
+  try {
+    const response = await fetch(`${URL}clientes`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ idCli, nombre, direccion, telefono, fchIngreso }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.status}`);
+    }
+    return true;
+  } catch (error) {
+    console.error(`An error has occurred in updateClient: ${error.message}`);
+    throw error;
+  }
+};
+
+const VentaPorCliente = async (id) => {
+  try {
+    const response = await fetch(`${URL}ventas/clientes/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.status}`);
+    }
+    const ventas = await response.json();
+    return ventas;
+  } catch (error) {
+    console.error(`An error has occurred in VentaPorCliente: ${error.message}`);
+    return [];
+  }
+};
+
+export {
   logIn,
   getAllProducts,
-  ClientRegister
-} ;
+  ClientRegister,
+  getProduct,
+  ProductRegister,
+  VentaRegister,
+  getAllClientsVip,
+  getAllClientsRegular,
+  deleteClient,
+  getClient,
+  updateClient,
+};
