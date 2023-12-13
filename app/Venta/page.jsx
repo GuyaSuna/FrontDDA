@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import { VentaRegister, getAllProducts } from "../../Api/api";
@@ -33,14 +33,7 @@ const Venta = () => {
     console.log("ABRRRRRRRRRRRRR");
 
     try {
-      const success = await VentaRegister(
-        ventaNumber,
-        productList,
-        totalSale,
-        purchaseDate,
-        seller,
-        client
-      );
+      const success = await VentaRegister(ventaNumber,productList,totalSale,purchaseDate, seller, client);
 
       if (success) {
         router.push("/");
@@ -55,13 +48,13 @@ const Venta = () => {
   const fetchData = async () => {
     try {
       const data = await getAllProducts();
-      console.log("Data:", data);
+      console.log('Data:', data); 
       setProductList(data);
     } catch (error) {
       console.error(`Error fetching data: ${error.message}`);
     }
   };
-
+  
   useEffect(() => {
     fetchData();
   }, []);
@@ -162,7 +155,7 @@ const Venta = () => {
             {product.nombre}
           </div>
           <button
-            onClick={() => handleProductSelect(product)}
+            onClick={() => handleDeleteProductSelect(product)}
             className="bg-red-500 text-white px-4 py-2 rounded-md"
           >
             Remove
@@ -199,32 +192,29 @@ const Venta = () => {
       >
         <h2 className="text-2xl font-bold mb-4">Product List</h2>
         <div className="flex flex-wrap justify-center">
-          {productList.map((product, index) => (
-            <div
-              key={product.id}
-              className="flex-shrink-0 bg-white p-4 rounded-md shadow-md flex flex-col items-center m-2"
-              style={{ width: "150px" }}
-            >
-              <img
-                src={product.imageUrl}
-                alt={product.nombre}
-                className="mb-2 rounded-md"
-                style={{ width: "100%", height: "100px", objectFit: "cover" }}
-              />
-              <p className="text-lg font-semibold">{product.nombre}</p>
-              <button
-                onClick={() => handleProductSelect(product)}
-                className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md"
-              >
-                Add
-              </button>
-            </div>
-          ))}
-        </div>
-        <button
-          onClick={closeModal}
-          className="bg-blue-500 text-white px-4 py-2 rounded-md mt-4"
-        >
+  {productList.map((product, index) => (
+    <div
+      key={product.id}
+      className="flex-shrink-0 bg-white p-4 rounded-md shadow-md flex flex-col items-center m-2"
+      style={{ width: "150px" }}
+    >
+      <img
+        src={product.imageUrl}
+        alt={product.nombre}
+        className="mb-2 rounded-md"
+        style={{ width: "100%", height: "100px", objectFit: "cover" }}
+      />
+      <p className="text-lg font-semibold">{product.nombre}</p>
+      <button
+        onClick={() => handleProductSelect(product)}
+        className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md"
+      >
+        Add
+      </button>
+    </div>
+  ))}
+</div>
+        <button onClick={closeModal} className="bg-blue-500 text-white px-4 py-2 rounded-md mt-4">
           Close
         </button>
       </Modal>
@@ -249,6 +239,30 @@ const Venta = () => {
 };
 
 export default Venta;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // pages/venta.js
 // import React from 'react';

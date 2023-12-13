@@ -3,11 +3,11 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { getAllProducts } from "../../Api/api";
-// import Card from "react-bootstrap/Card";
-// import Col from "react-bootstrap/Col";
-// import Row from "react-bootstrap/Row";
+import Cookies from 'js-cookie';
+
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Button } from "react-bootstrap";
 
 const allProducts = () => {
   const router = useRouter();
@@ -34,14 +34,13 @@ const allProducts = () => {
       console.error(`Error fetching data: ${error.message}`);
     }
   };
-  // const handleDetail = codProd => {
-  //   console.log("Código del producto:", codProd);
-  //   router.push(`/DetailProduct/?codProd=1`);
-  // };
+
   const handleDetail = codProd => {
-    console.log("Código del producto:", codProd);
-    router.push(`/DetailProduct/?codProd=${codProd}`);
+    console.log('Código del producto:', codProd);
+    sessionStorage.setItem('codProd', codProd);
+    router.push('/DetailProduct');
   };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -122,13 +121,16 @@ const allProducts = () => {
                 </p>
               </div>
               <div className="p-6 pt-0">
-                <button
-                  className="block w-full select-none rounded-lg bg-blue-gray-900/10 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-blue-gray-900 transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                  type="button"
-                  onClick={() => handleDetail(product.codProd)}
-                >
-                  Ver detalle
-                </button>
+              <Link
+              className="block w-full select-none rounded-lg bg-blue-gray-900/10 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-blue-gray-900 transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              type="button"
+              onClick={() => {
+                sessionStorage.setItem('codProd', product.codProd.toString());
+              }}
+              href={`/DetailProduct`}
+            >
+              Ver detalle
+            </Link>
               </div>
             </div>
           ))}

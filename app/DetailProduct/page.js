@@ -2,13 +2,13 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import React  from "react";
-import { deleteProduct, getAllProducts, getProduct } from "@/Api/api";
+import Cookies from 'js-cookie';
+import { deleteProduct, getAllProducts, getProduct } from "../../Api/api";
 
-const detailProduct = ({}) => {
+const detailProduct = () => {
   const router = useRouter();
-  const codProd = router.query?.codProd;
-  console.log('Código del producto en DetailProduct:', codProd);
+
+  const [ codProd ,setCodProd] = useState(0);
   const [showAlert, setShowAlert] = useState(false);
   const [productDetails, setProductDetails] = useState({});
 
@@ -41,6 +41,11 @@ const detailProduct = ({}) => {
       console.error("Error durante la eliminacion:", error);
     }
   }
+  useEffect(() => {
+   setCodProd(sessionStorage.getItem('codProd'));
+    console.log('Código del producto:', codProd);
+  }, []);
+
 
   useEffect(() => {
     if (codProd) {
