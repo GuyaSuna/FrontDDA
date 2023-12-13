@@ -18,7 +18,7 @@ const logIn = async (name, password) => {
     console.log(data);
 
     if (data.nroVendedor) {
-      return true;
+      return data;
     } else {
       return false;
     }

@@ -1,31 +1,31 @@
 "use client";
-
-import React, { useState } from "react";
-import { logIn } from "../../Api/api";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-
+import React, { useState } from 'react';
+import { logIn } from '../../Api/api';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { useUsuario } from '../../Context/userContext';
 
 function LoginPage() {
   const router = useRouter();
+  const { iniciarSesion } = useUsuario();
 
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleLogIn = async (e) => {
     e.preventDefault();
-    console.log("ABRRRRRRRRRRRRR");
 
     try {
-      const success = await logIn(name, password);
+      const datosUsuario = await logIn(name, password);
 
-      if (success) {
-        router.push("/");
+      if (datosUsuario) {
+        iniciarSesion(datosUsuario);
+        router.push('/');
       } else {
-        console.log("Inicio de sesión fallido");
+        console.log('Inicio de sesión fallido');
       }
     } catch (error) {
-      console.error("Error durante el inicio de sesión:", error);
+      console.error('Error durante el inicio de sesión:', error);
     }
   };
 
