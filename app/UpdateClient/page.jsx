@@ -8,7 +8,7 @@ import Link from "next/link";
 const UpdateClient = () => {
   const router = useRouter();
 
-  const [client, setClient] = useState({});
+  const [client, setClient] = useState(0);
   const [clientName, setClientName] = useState("");
   const [clientDirection, setClientDirection] = useState("");
   const [clientPhone, setClientPhone] = useState("");
@@ -17,12 +17,8 @@ const UpdateClient = () => {
 
   useEffect(() => {
     console.log("lo que vos quieras poner");
-    setClient(JSON.parse(localStorage.getItem("cliente")));
-    console.log("Código del cliente:", client.idCli);
-    setClientName(client.nombre);
-    setClientDirection(client.direccion);
-    setClientPhone(client.telefono);
-    setClientDate(client.fchIngreso);
+    const idCli = localStorage.getItem("cliente");
+    console.log("Código del cliente:",idCli);
   }, []);
 
   const handleCheckboxChange = (event) => {

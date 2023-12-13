@@ -2,8 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import Cookies from 'js-cookie';
-import { deleteProduct, getAllProducts, getProduct } from "../../Api/api";
+import { getAllProducts, getProduct } from "../../Api/api";
 
 const detailProduct = () => {
   const router = useRouter();
@@ -41,6 +40,7 @@ const detailProduct = () => {
       console.error("Error durante la eliminacion:", error);
     }
   }
+
   useEffect(() => {
    setCodProd(sessionStorage.getItem('codProd'));
     console.log('Código del producto:', codProd);

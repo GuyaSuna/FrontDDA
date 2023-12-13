@@ -87,13 +87,10 @@ const AllClientsPage = () => {
     }
   };
   const handleClientClick = (clientId) => {
-    const selectedClient = regularClients.find(
-      (client) => client.idCli === clientId
-    );
-    if (selectedClient) {
-      sessionStorage.setItem("cliente", JSON.stringify(selectedClient));
+  
+      sessionStorage.setItem("idCli", clientId);
       router.push(`/UpdateClient/${clientId}`);
-    }
+    
   };
 
   return (
