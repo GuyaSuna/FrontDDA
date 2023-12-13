@@ -122,7 +122,7 @@ const detailProduct = ({}) => {
           <p className="md:w-96 text-base leading-normal text-gray-600 dark:text-gray-300 mt-4">
             Cantidad Stock                                 20
           </p>
-          <button className="dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-base flex items-center justify-center leading-none text-white bg-gray-800 w-full py-4 hover:bg-gray-700 focus:outline-none">
+          <button className="dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-base flex items-center justify-center leading-none text-white bg-red w-full py-4 hover:bg-gray-700 focus:outline-none">
           <svg
             className="mr-3 text-white dark:text-gray-900"
             width={16}
