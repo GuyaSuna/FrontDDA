@@ -2,13 +2,15 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { updateClient } from "../../Api/api";
+import { getClient } from "../../Api/api";
+
 import Link from "next/link";
 
 const UpdateClient = () => {
   const router = useRouter();
 
-  const [client, setClient] = useState(0);
+  const [idCli , setIdCli] = useState(0);
+  const [client, setClient] = useState({});
   const [clientName, setClientName] = useState("");
   const [clientDirection, setClientDirection] = useState("");
   const [clientPhone, setClientPhone] = useState("");
@@ -17,10 +19,34 @@ const UpdateClient = () => {
 
   useEffect(() => {
     console.log("lo que vos quieras poner");
-    const idCli = localStorage.getItem("cliente");
+    setIdCli(sessionStorage.getItem("idCli"));
     console.log("Código del cliente:",idCli);
   }, []);
 
+  useEffect(() => {
+    if (idCli) {
+      const fetchProductDetails = async () => {
+        try {
+          const details = await getClient(idCli);
+          console.log( details)
+          setClientName(details.nombre)
+          setClientDirection(details.direccion)
+          setClientPhone(details.telefono)
+          if(details.fchIngreso != null){
+            setClientDate(details.fchIngreso )
+            setEsVip(true)
+          }
+          
+          setClient(details);
+        
+        } catch (error) {
+          console.error("Error al cargar detalles del producto:", error);
+        }
+      };
+
+      fetchProductDetails();
+    }
+  }, [idCli]);
   const handleCheckboxChange = (event) => {
     setEsVip(event.target.checked);
   };

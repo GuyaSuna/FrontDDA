@@ -259,6 +259,27 @@ const getProduct = (codProd) => {
   });
 };
 
+const getClient = (idCli) => {
+  return new Promise((resolve, reject) => {
+    fetch(`${URL}clientes/${idCli}`, {
+      method: `GET`,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          const errorMessage = `La solicitud falló con código: ${response.status}`;
+          reject(errorMessage);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        resolve(data);
+      })
+      .catch((error) => {
+        reject(error.message || "Error desconocido");
+      });
+  });
+};
+
 export {
   logIn,
   getAllProducts,
@@ -269,4 +290,6 @@ export {
   getAllClientsVip,
   getAllClientsRegular,
   deleteClient,
+  getClient
+  
 };

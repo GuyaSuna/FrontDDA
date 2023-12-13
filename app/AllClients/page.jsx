@@ -88,7 +88,7 @@ const AllClientsPage = () => {
   };
   const handleClientClick = (clientId) => {
   
-      sessionStorage.setItem("idCli", clientId);
+      sessionStorage.setItem("idCli", clientId.toString());
       router.push(`/UpdateClient/${clientId}`);
     
   };
@@ -137,8 +137,11 @@ const AllClientsPage = () => {
                 <strong>Fecha de Ingreso:</strong> {client.fchIngreso}
               </div>
               <div>
-                <button
-                  onClick={() => handleVipClick(client.idCli)}
+              <Link
+                  onClick={() => {
+                    sessionStorage.setItem("idCli", client.idCli.toString());
+                  }}
+                  href="/UpdateClient"
                   style={{
                     color: "black",
                     backgroundColor: "yellow",
@@ -150,7 +153,7 @@ const AllClientsPage = () => {
                   }}
                 >
                   Editar
-                </button>
+                </Link>
                 <button
                   onClick={() => handleVipClientDelete(client.idCli)}
                   style={{
@@ -211,7 +214,7 @@ const AllClientsPage = () => {
               <div>
                 <Link
                   onClick={() => {
-                    handleClientClick(client.idCli);
+                    sessionStorage.setItem("idCli", client.idCli.toString());
                   }}
                   href="/UpdateClient"
                   style={{
