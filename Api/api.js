@@ -308,6 +308,25 @@ const updateProduct = async (updatedProductData) => {
   }
 };
 
+const VentaPorCliente = async (id) => {
+  try {
+    const response = await fetch(`${URL}ventas/clientes/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.status}`);
+    }
+    const ventas = await response.json();
+    return ventas;
+  } catch (error) {
+    console.error(`An error has occurred in VentaPorCliente: ${error.message}`);
+    return [];
+  }
+};
+
 export {
   logIn,
   getAllProducts,
@@ -317,4 +336,8 @@ export {
   updateProduct,
   ProductRegister,
   VentaRegister,
+  getAllClientsRegular,
+  getAllClientsVip,
+  deleteClient,
+  VentaPorCliente,
 };
