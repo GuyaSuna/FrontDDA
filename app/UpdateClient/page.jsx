@@ -2,14 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { getClient } from "../../Api/api";
+import { getClient, updateClient } from "../../Api/api";
 
 import Link from "next/link";
 
 const UpdateClient = () => {
   const router = useRouter();
 
-  const [idCli , setIdCli] = useState(0);
+  const [idCli, setIdCli] = useState(0);
   const [client, setClient] = useState({});
   const [clientName, setClientName] = useState("");
   const [clientDirection, setClientDirection] = useState("");
@@ -20,7 +20,7 @@ const UpdateClient = () => {
   useEffect(() => {
     console.log("lo que vos quieras poner");
     setIdCli(sessionStorage.getItem("idCli"));
-    console.log("Código del cliente:",idCli);
+    console.log("Código del cliente:", idCli);
   }, []);
 
   useEffect(() => {
@@ -28,17 +28,16 @@ const UpdateClient = () => {
       const fetchProductDetails = async () => {
         try {
           const details = await getClient(idCli);
-          console.log( details)
-          setClientName(details.nombre)
-          setClientDirection(details.direccion)
-          setClientPhone(details.telefono)
-          if(details.fchIngreso != null){
-            setClientDate(details.fchIngreso )
-            setEsVip(true)
+          console.log(details);
+          setClientName(details.nombre);
+          setClientDirection(details.direccion);
+          setClientPhone(details.telefono);
+          if (details.fchIngreso != null) {
+            setClientDate(details.fchIngreso);
+            setEsVip(true);
           }
-          
+
           setClient(details);
-        
         } catch (error) {
           console.error("Error al cargar detalles del producto:", error);
         }
@@ -62,7 +61,7 @@ const UpdateClient = () => {
       });
 
       if (success) {
-        router.push("/");
+        router.push("/AllClients");
       } else {
         console.log("Actualización fallida");
       }

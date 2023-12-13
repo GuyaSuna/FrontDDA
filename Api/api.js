@@ -279,6 +279,25 @@ const getClient = (idCli) => {
       });
   });
 };
+const updateClient = async (idCli, nombre, direccion, telefono, fchIngreso) => {
+  try {
+    const response = await fetch(`${URL}clientes`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ idCli, nombre, direccion, telefono, fchIngreso }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.status}`);
+    }
+    return true;
+  } catch (error) {
+    console.error(`An error has occurred in updateClient: ${error.message}`);
+    throw error;
+  }
+};
 
 const VentaPorCliente = async (id) => {
   try {
@@ -310,4 +329,5 @@ export {
   getAllClientsRegular,
   deleteClient,
   getClient,
+  updateClient,
 };
