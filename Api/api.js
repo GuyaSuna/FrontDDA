@@ -79,15 +79,14 @@ const ProductRegister = async (
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-       "codProd": codProd,
-        "nombre" : nombre,
-        "descripcion" :descripcion,
-         "precio" :precio,
-        "cantStock" :cantStock,
-        "imageUrl":imageUrl
+        codProd: codProd,
+        nombre: nombre,
+        descripcion: descripcion,
+        precio: precio,
+        cantStock: cantStock,
+        imageUrl: imageUrl,
       }),
     });
-   
 
     if (response.ok) {
       const responseBody = await response.json();
@@ -112,23 +111,23 @@ const ProductRegister = async (
 
 const ClientRegister = async (name, address, phone, date) => {
   try {
-    if (date != "") {
-      const response = await fetch(`${URL}Clientes`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, address, phone }),
-      });
-    } else {
-      const response = await fetch(`${URL}Clientes`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, address, phone, date }),
-      });
+    let url = `${URL}clientes/regular`;
+    if (date !== "") {
+      url = `${URL}clientes/vip`;
     }
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nombre: name,
+        direccion: address,
+        telefono: parseInt(phone),
+        fchIngreso: date,
+      }),
+    });
 
     console.log("Response status:", response.status);
 
@@ -136,7 +135,7 @@ const ClientRegister = async (name, address, phone, date) => {
       const responseBody = await response.json();
       console.log("Response body:", responseBody);
 
-      if (responseBody.nroVendedor) {
+      if (responseBody.idCli) {
         console.log("Registro exitoso");
         return true;
       } else {
@@ -150,6 +149,72 @@ const ClientRegister = async (name, address, phone, date) => {
   } catch (error) {
     console.error(`An error has occurred in ClientRegister: ${error.message}`);
     return false;
+  }
+};
+
+const getAllClientsVip = async () => {
+  try {
+    const url = `${URL}clientes/vip`;
+    const response = await fetch(url, {
+      method: `GET`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`La solicitud falló  ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.error(`Error en la función getAllClientsVip: ${error.message}`);
+    throw error;
+  }
+};
+
+const getAllClientsRegular = async () => {
+  try {
+    const url = `${URL}clientes/regular`;
+    const response = await fetch(url, {
+      method: `GET`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`La solicitud falló  ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.error(`Error en la función getAllClientsRegular: ${error.message}`);
+    throw error;
+  }
+};
+
+const deleteClient = async (id) => {
+  console.log(id);
+  try {
+    const url = `${URL}clientes/${id}`;
+    const response = await fetch(url, {
+      method: `DELETE`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (response.ok) {
+      console.log(`Cliente  eliminado con éxito: ${id}`);
+      return true;
+    } else {
+      console.error(`No se pudo eliminar el cliente: ${id}`);
+      return false;
+    }
+  } catch (error) {
+    console.error(`Error al eliminar el cliente: ${error.message}`);
   }
 };
 
@@ -173,84 +238,35 @@ const getAllProducts = async () => {
   }
 };
 
-const getProduct = codProd => {
+const getProduct = (codProd) => {
   return new Promise((resolve, reject) => {
     fetch(`${URL}products/${codProd}`, {
       method: `GET`,
     })
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
           const errorMessage = `La solicitud falló con código: ${response.status}`;
           reject(errorMessage);
         }
         return response.json();
       })
-      .then(data => {
+      .then((data) => {
         resolve(data);
       })
-      .catch(error => {
+      .catch((error) => {
         reject(error.message || "Error desconocido");
       });
   });
 };
 
-const deleteProduct = (codProd, setMsg, setSucces, setListaProductos) => {
-  fetch(`${URL}products/${codProd}`,{
-      method: `DELETE`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    .then(response => {
-      if(!response.ok) {
-        throw new Error(`La solicitud fallo: ${response.status}`);
-      }
-      return response.text();
-  })
-  .then(data =>{
-    setMsg(data)
-    setSucces(true)
-    ListaProductos(setListaProductos)
-    console.log(`data`,data);
-  })
-  .catch(error =>{
-    setMsg(error)
-    setSucces(false)
-    console.log(`Fetch error:`,error);
-  })
-};
-
-const updateProduct = async (updatedProductData) => {
-  try {
-    const response = await fetch(`${URL}/products`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updatedProductData),
-    });
-
-    if (!response.ok) {
-      throw new Error(`La solicitud PUT falló con código ${response.status}`);
-    }
-
-    const updatedProduct = await response.json();
-    console.log('Producto actualizado:', updatedProduct);
-    return updatedProduct;
-  } catch (error) {
-    console.error(`Error al actualizar el producto: ${error.message}`);
-    throw error;
-  }
-};
-
-
-export{
+export {
   logIn,
   getAllProducts,
   ClientRegister,
   getProduct,
-  deleteProduct,
-  updateProduct,
   ProductRegister,
-  VentaRegister
-} ;
+  VentaRegister,
+  getAllClientsVip,
+  getAllClientsRegular,
+  deleteClient,
+};

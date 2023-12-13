@@ -7,7 +7,6 @@ import React from "react";
 const Home = () => {
   return (
     <div className="display-flex min-h-screen w-full flex-col items-center justify-between  bg-slate-800">
-      
       {/* Statistics Cards */}
       <CardsStatistics />
       {/* ./Statistics Cards */}
@@ -403,12 +402,14 @@ const Home = () => {
               <div className="bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer"></div>
               <div className="bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer"></div>
               <div className="bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer"></div>
-              <button
-                className="bg-blue-500 dark:bg-gray-100 text-white active:bg-blue-600 dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none  m-1 ease-linear transition-all duration-150 hover:bg-gray-400"
-                type="button"
-              >
-                Ver todos
-              </button>
+              <Link href="/AllClients">
+                <button
+                  className="bg-blue-500 dark:bg-gray-100 text-white active:bg-blue-600 dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none  m-1 ease-linear transition-all duration-150 hover:bg-gray-400"
+                  type="button"
+                >
+                  Ver todos
+                </button>
+              </Link>
             </div>
           </div>
         </div>
