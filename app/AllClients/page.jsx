@@ -5,7 +5,6 @@ import { getAllClientsVip, getAllClientsRegular } from "../../Api/api";
 import { useState, useEffect } from "react";
 import clientes from "../Clientes/page";
 import { deleteClient } from "../../Api/api";
-import Link from "@/node_modules/next/link";
 
 const AllClientsPage = () => {
   const router = useRouter([]);
@@ -50,7 +49,6 @@ const AllClientsPage = () => {
     fetchVipClients();
     fetchRegularClients();
   }, []);
-
   const handleRegularClientDelete = async (id) => {
     try {
       const response = await deleteClient(id, false);
@@ -84,15 +82,6 @@ const AllClientsPage = () => {
       }
     } catch (error) {
       console.error(`Error al eliminar el cliente VIP: ${error.message}`);
-    }
-  };
-  const handleClientClick = (clientId) => {
-    const selectedClient = regularClients.find(
-      (client) => client.idCli === clientId
-    );
-    if (selectedClient) {
-      sessionStorage.setItem("cliente", JSON.stringify(selectedClient));
-      router.push(`/UpdateClient/${clientId}`);
     }
   };
 
@@ -212,11 +201,8 @@ const AllClientsPage = () => {
                 <strong>id:</strong> {client.idCli} -
               </div>
               <div>
-                <Link
-                  onClick={() => {
-                    handleClientClick(client.idCli);
-                  }}
-                  href="/UpdateClient"
+                <button
+                  onClick={() => handleRegularClick(client.idCli)}
                   style={{
                     color: "black",
                     backgroundColor: "yellow",
@@ -228,7 +214,7 @@ const AllClientsPage = () => {
                   }}
                 >
                   Editar
-                </Link>
+                </button>
                 <button
                   onClick={() => handleRegularClientDelete(client.idCli)}
                   style={{
