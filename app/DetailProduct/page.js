@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { getAllProducts, getProduct, deleteProduct } from "../../Api/api";
+import { deleteProduct, getAllProducts, getProduct } from "../../Api/api";
 
 const detailProduct = () => {
   const router = useRouter();
@@ -24,22 +24,37 @@ const detailProduct = () => {
     router.push(`/UpdateProducts`);
   };
 
-  const handleDelete = async (e) => {
-    e.preventDefault();
+  // const handleDelete = async (e) => {
+  //   e.preventDefault();
+  //   console.log("Codigo Delete producto:", codProd);
+
+  //   try {
+  //     const success = deleteProduct(codProd, setMsg, setSucces, setListaProductos);
+
+  //     if (success) {
+  //       router.push("/AllProducts");
+  //     } else {
+  //       console.log("Eliminacion fallida");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error durante la eliminacion:", error);
+  //   }
+  // }
+  const handleDelete = async (codProd) => {
     console.log("Codigo Delete producto:", codProd);
-
     try {
-      const success = deleteProduct(codProd);
+      const response = await deleteProduct(codProd, true);
 
-      if (success) {
+      if (response) {
         router.push("/AllProducts");
+        console.log(`Cliente VIP eliminado con éxito: ${codProd}`);
       } else {
-        console.log("Eliminacion fallida");
+        console.error(`No se pudo eliminar el producto: ${codProd}`);
       }
     } catch (error) {
-      console.error("Error durante la eliminacion:", error);
+      console.error(`Error al eliminar el cliente VIP: ${error.message}`);
     }
-  }
+  };
 
   useEffect(() => {
    setCodProd(sessionStorage.getItem('codProd'));
@@ -171,7 +186,7 @@ const detailProduct = () => {
             <div className="flex">
               <div className="flex-1 group">
                 <button
-                  onClick={handleDelete}
+                  onClick={() => handleDelete(productDetails.codProd)}
                   className="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500"
                 >
                   <span className="block px-1 pt-1 pb-1">

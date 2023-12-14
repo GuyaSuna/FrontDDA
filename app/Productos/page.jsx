@@ -49,7 +49,7 @@ const ProductPage = () => {
 
   const handleProductRegister = async (e) => {
     e.preventDefault();
-    console.log("ABRRRRRRRRRRRRR");
+    console.log("AGREGAR PRODUCTO");
 
     try {
       const success = await ProductRegister(
@@ -83,7 +83,7 @@ const ProductPage = () => {
             <input
               type="text"
               id="codProd"
-              name="codPro"
+              name="codProd"
               value={codProd}
               onChange={handleCodProChange}
               className="mt-1 p-2 w-full border-b-2 border-blue-500 focus:outline-none focus:border-blue-700"
