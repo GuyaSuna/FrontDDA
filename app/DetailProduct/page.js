@@ -20,16 +20,16 @@ const detailProduct = () => {
   };
 
   const handleUpdate = () => {
-    console.log("Código del producto:", codProd);
+    console.log("Código del update:", codProd);
     router.push(`/UpdateProducts`);
   };
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    console.log("Delete producto:", codProd);
+    console.log("Codigo Delete producto:", codProd);
 
     try {
-      const success = await deleteProduct(codProd, setMsg, setSucces, setListaProductos);
+      const success = deleteProduct(codProd, setMsg, setSucces, setListaProductos);
 
       if (success) {
         router.push("/AllProducts");
@@ -64,7 +64,7 @@ const detailProduct = () => {
   return (
     <div className="md:flex items-start justify-center py-12 2xl:px-20 md:px-6 px-4">
         <img
-          className="w-auto h-auto border-radius rounded-md"
+          className="w-80 h-80 border-radius rounded-md"
           alt="image of a girl posing"
          src={productDetails.imageUrl}
         />
@@ -72,6 +72,9 @@ const detailProduct = () => {
         <div className="border-b border-gray-200 pb-6">
           <h1 className="lg:text-2xl text-xl font-semibold lg:leading-6 leading-7 text-gray-800 dark:text-white mt-2">
             {productDetails.nombre}
+          </h1>
+          <h1 className="lg:text-2xl text-xl font-semibold lg:leading-6 leading-7 text-gray-800 dark:text-white mt-2">
+            Codigo:  {productDetails.codProd}
           </h1>
         </div>
         <div className="py-4 border-b border-gray-200 flex items-center justify-between">

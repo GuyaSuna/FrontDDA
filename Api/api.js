@@ -299,6 +299,31 @@ const updateClient = async (idCli, nombre, direccion, telefono, fchIngreso) => {
   }
 };
 
+const updateProduct = async (updatedProductData) => {
+  try {
+    const response = await fetch(`${URL}products`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedProductData),
+    });
+
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      throw new Error(`La solicitud PUT falló con código ${response.status}. Detalles: ${JSON.stringify(errorResponse)}`);
+    }
+    
+
+    const updatedProduct = await response.json();
+    console.log('Producto actualizado:', updatedProduct);
+    return updatedProduct;
+  } catch (error) {
+    console.error(`An error has occurred in updateClient: ${error.message}`);
+    throw error;
+  }
+};
+
 const VentaPorCliente = async (id) => {
   try {
     const response = await fetch(`${URL}ventas/clientes/${id}`, {
@@ -330,4 +355,5 @@ export {
   deleteClient,
   getClient,
   updateClient,
+  updateProduct
 };

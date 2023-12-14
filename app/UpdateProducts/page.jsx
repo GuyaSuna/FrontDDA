@@ -2,40 +2,34 @@
 
 import { useRouter } from 'next/navigation';
 import React from 'react'
-import {updateProduct} from "../../Api/api";
-import { useState } from "react";
+import {updateProduct, getProduct} from "../../Api/api";
+import { useState, useEffect } from "react";
 
 const updateProducts = () => {
-    const router = useRouter();
+  const router = useRouter();
 
   const [imageUrl, setImage] = useState("");
   const [cantStock, setStock] = useState("");
-  const [precio, setPrice] = useState("");
-  const [descripcion, setDescription] = useState("");
+  const [precio, setPrecio] = useState("");
+  const [descripcion, setDescripcion] = useState("");
   const [nombre, setNombre] = useState("");
-  const [codProd, setCodPro] = useState("");
-
-  const handleDescriptionChange = (e) => {
-    setDescription(e.target.value);
+  const [codProd, setCodProd] = useState();
+  const [product, setProductDetails] = useState([]);
+  
+  const handleDescripcionChange = (e) => {
+    setDescripcion(e.target.value);
   };
-
   const handleNombreChange = (e) => {
     setNombre(e.target.value);
   };
 
-  const handlePriceChange = (e) => {
-    setPrice(e.target.value);
+  const handlePrecioChange = (e) => {
+    setPrecio(e.target.value);
   };
 
   const handleStockChange = (e) => {
     setStock(e.target.value);
   };
-
-  const handleCodProChange = (e) => {
-    const newValue = e.target.value.toString();
-    setCodPro(newValue);
-  };
-
   const handleImageChange = (e) => {
     const file = e.target.files[0];
 
@@ -45,25 +39,54 @@ const updateProducts = () => {
       setImage(imageUrl);
     }
   };
-    const handleUpdateProduct = async () => {
-        const codProd = 1; 
-        const updatedProductData = {
-          nombre,
-          descripcion,
-          precio,
-          cantStock,
-          imageUrl, 
-        };
-      
-        try {
-          await updateProduct(codProd, updatedProductData);
-          console.log('Producto actualizado con éxito');
-        } catch (error) {
-          console.error('Error al actualizar el producto:', error);
-        }
+  const handleUpdateProduct = async () => {
+    if (codProd !== null) {
+      const updatedProductData = {
+        nombre: nombre,
+        descripcion: descripcion,
+        precio: precio,
+        cantStock: cantStock,
+        imageUrl: imageUrl,
       };
+  
+      try {
+        await updateProduct(codProd, updatedProductData);
+        console.log('Producto actualizado con éxito');
+      } catch (error) {
+        console.error('Error al actualizar el producto:', error);
+      }
+    } else {
+      console.error('Error: Código del producto no disponible');
+    }
+  };
 
-
+      useEffect(() => {
+        setCodProd(sessionStorage.getItem('codProd'));
+         console.log('Código del producto:', codProd);
+       }, []);
+     
+     
+       useEffect(() => {
+        if (codProd) {
+          const fetchProductDetails = async () => {
+            try {
+              const details = await getProduct(codProd);
+              console.log(details)
+              setNombre(details.nombre);
+              setDescripcion(details.descripcion);
+              setPrecio(details.precio);
+              setStock(details.cantStock);
+              setImage(details.imageUrl);
+              setProductDetails(details);
+            } catch (error) {
+              console.error("Error al cargar detalles del producto:", error);
+            }
+          };
+    
+          fetchProductDetails();
+        }
+      }, [codProd]);
+      
   return (
     <main className="h-screen flex items-center justify-center bg-gray-900">
       <div className="bg-white p-8 rounded-lg shadow-md w-96 text-gray-800">
@@ -78,7 +101,6 @@ const updateProducts = () => {
               id="codProd"
               name="codPro"
               value={codProd}
-              onChange={handleCodProChange}
               className="mt-1 p-2 w-full border-b-2 border-blue-500 focus:outline-none focus:border-blue-700"
             />
           </div>
@@ -104,7 +126,7 @@ const updateProducts = () => {
               id="description"
               name="description"
               value={descripcion}
-              onChange={handleDescriptionChange}
+              onChange={handleDescripcionChange}
               className="mt-1 p-2 w-full border-b-2 border-blue-500 focus:outline-none focus:border-blue-700"
             />
           </div>
@@ -117,7 +139,7 @@ const updateProducts = () => {
               id="price"
               name="price"
               value={precio}
-              onChange={handlePriceChange}
+              onChange={handlePrecioChange}
               className="mt-1 p-2 w-full border-b-2 border-blue-500 focus:outline-none focus:border-blue-700"
             />
           </div>
