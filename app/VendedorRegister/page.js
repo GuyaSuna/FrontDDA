@@ -4,7 +4,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
-import { vendedorRegister } from "../../Api/api";
+import {RegisterVendedor} from "../../Api/api";
 
 const VendedorRegister = () => {
   const router = useRouter();
@@ -33,7 +33,7 @@ const VendedorRegister = () => {
     console.log("VENDEDOR REGISTER");
 
     try {
-      const success = await vendedorRegister(
+      const success = await RegisterVendedor(
         nroVendedor,
         nombre,
         password,

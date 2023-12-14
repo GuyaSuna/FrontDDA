@@ -367,6 +367,40 @@ const deleteProduct = async (id) => {
   }
 };
 
+const RegisterVendedor = async (
+ nroVendedor,
+  nombre,
+  Contraseña
+) => {
+  try {
+    const response = await fetch(`${URL}vendedor`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nroVendedor: nroVendedor,
+        nombre: nombre,
+        password: Contraseña
+      }),
+    });
+
+    if (response.ok) {
+      const responseBody = await response.json();
+      console.log("Response body:", responseBody);
+      
+        console.log("Registro exitoso");
+        return true;
+    } else {
+      console.error("Error en la solicitud:", response.status);
+      return false;
+    }
+  } catch (error) {
+    console.error(`An error has ocurred in Producto: ${error.message}`);
+    return false;
+  }
+};
+
 
 
 export {
@@ -382,5 +416,6 @@ export {
   getClient,
   updateClient,
   updateProduct,
-  deleteProduct
+  deleteProduct,
+  RegisterVendedor
 };
