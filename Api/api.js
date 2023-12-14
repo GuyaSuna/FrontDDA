@@ -388,7 +388,7 @@ const RegisterVendedor = async (
     if (response.ok) {
       const responseBody = await response.json();
       console.log("Response body:", responseBody);
-      
+
         console.log("Registro exitoso");
         return true;
     } else {
@@ -399,6 +399,28 @@ const RegisterVendedor = async (
     console.error(`An error has ocurred in Producto: ${error.message}`);
     return false;
   }
+};
+
+const getProductStockMenor = (cantStock) => {
+  console.log(cantStock)
+  return new Promise((resolve, reject) => {
+    fetch(`${URL}products/stockMenor/${cantStock}`, {
+      method: `GET`,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          const errorMessage = `La solicitud falló con código: ${response.status}`;
+          reject(errorMessage);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        resolve(data);
+      })
+      .catch((error) => {
+        reject(error.message || "Error desconocido");
+      });
+  });
 };
 
 
@@ -417,5 +439,6 @@ export {
   updateClient,
   updateProduct,
   deleteProduct,
-  RegisterVendedor
+  RegisterVendedor,
+  getProductStockMenor
 };
