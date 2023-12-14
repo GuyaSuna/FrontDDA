@@ -107,13 +107,9 @@ const Venta = () => {
     <>
     {usuario && usuario.nroVendedor !== null && (
       <main
-        className="h-screen flex items-center justify-center bg-cover"
-        style={{
-          backgroundImage:
-            "url('https://img.freepik.com/vector-premium/fondo-abstracto-azul-linea-luz-verde-espacio-blanco_156943-56.jpg')",
-        }}
+        className="h-screen flex items-center justify-center bg-cover"    
       >
-        <div className="container mx-auto my-8 p-8 bg-gray-100 shadow-md rounded-md">
+        <div className="container mx-auto my-8 p-8 bg-gray-100 shadow-md rounded-md w-96">
           <h2 className="text-3xl font-bold mb-6">Venta Details</h2>
 
           <div className="mb-4">
@@ -228,6 +224,7 @@ const Venta = () => {
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
           contentLabel="Product List Modal"
+          
         >
           <h2 className="text-2xl font-bold mb-4">Product List</h2>
           <div className="flex flex-wrap justify-center">
@@ -264,7 +261,7 @@ const Venta = () => {
     )}
     {usuario == null && (
   <div className="alert-message">
-    INGRESE SESIÓN POR FAVOR, AGUSTÍN
+    INGRESE SESIÓN POR FAVOR
     <style jsx>{`
       .alert-message {
         background-color: #ffcccc; 

@@ -110,7 +110,44 @@ const ProductRegister = async (
     return false;
   }
 };
+const vendedorRegister = async (
+  nroVendedor,
+  nombre,
+  password,
+) => {
+  try {
+    const response = await fetch(`${URL}vendedor`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nroVendedor: nroVendedor,
+        nombre: nombre,
+        password: password,
+      }),
+    });
 
+    if (response.ok) {
+      const responseBody = await response.json();
+      console.log("Response body:", responseBody);
+
+      if (responseBody.nroVendedor) {
+        console.log("Registro exitoso");
+        return true;
+      } else {
+        console.log("Registro fallido en api");
+        return false;
+      }
+    } else {
+      console.error("Error en la solicitud:", response.status);
+      return false;
+    }
+  } catch (error) {
+    console.error(`An error has ocurred in Producto: ${error.message}`);
+    return false;
+  }
+};
 const ClientRegister = async (name, address, phone, date) => {
   try {
     let url = `${URL}clientes/regular`;
@@ -329,7 +366,27 @@ const updateProduct = async (codProd,updatedProductData) => {
     throw error;
   }
 };
-
+const deleteProduct = async (codProd) => {
+  console.log(codProd);
+  try {
+    const url = `${URL}products/${codProd}`;
+    const response = await fetch(url, {
+      method: `DELETE`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (response.ok) {
+      console.log(`Cliente  eliminado con éxito: ${codProd}`);
+      return true;
+    } else {
+      console.error(`No se pudo eliminar el cliente: ${codProd}`);
+      return false;
+    }
+  } catch (error) {
+    console.error(`Error al eliminar el cliente: ${error.message}`);
+  }
+};
 const VentaPorCliente = async (id) => {
   try {
     const response = await fetch(`${URL}ventas/clientes/${id}`, {
@@ -355,11 +412,13 @@ export {
   ClientRegister,
   getProduct,
   ProductRegister,
+  deleteProduct,
   VentaRegister,
   getAllClientsVip,
   getAllClientsRegular,
   deleteClient,
   getClient,
   updateClient,
-  updateProduct
+  updateProduct,
+  vendedorRegister
 };
