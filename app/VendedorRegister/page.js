@@ -4,7 +4,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
-import { ProductRegister, vendedorRegister } from "../../Api/api";
+import { vendedorRegister } from "../../Api/api";
 
 const VendedorRegister = () => {
   const router = useRouter();
@@ -30,7 +30,7 @@ const VendedorRegister = () => {
 
   const handleVendedorRegister = async (e) => {
     e.preventDefault();
-    console.log("ABRRRRRRRRRRRRR");
+    console.log("VENDEDOR REGISTER");
 
     try {
       const success = await vendedorRegister(
@@ -59,8 +59,8 @@ const VendedorRegister = () => {
             </label>
             <input
               type="text"
-              id="codProd"
-              name="codPro"
+              id="nroVendedor"
+              name="nroVendedor"
               value={nroVendedor}
               onChange={handleNroVendedorChange}
               className="mt-1 p-2 w-full border-b-2 border-blue-500 focus:outline-none focus:border-blue-700"

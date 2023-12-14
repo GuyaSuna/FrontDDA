@@ -1,10 +1,28 @@
+"use client";
 import CardsStatistics from "@/Components/CardsStatistics";
-import Sidebar from "@/Components/Sidebar";
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-
+import { useState, useEffect } from "react";
+import { getAllClientsRegular } from "@/Api/api";
 const Home = () => {
+  const [clients, setClients] = useState([]);
+
+  const fetchClients = async () => {
+    try {
+      const regularData = await getAllClientsRegular();
+      console.log(regularData);
+      if (regularData && Array.isArray(regularData)) {
+        setClients(regularData);
+      } else {
+        console.error("Los datos de clientes regulares no son válidos.");
+      }
+    } catch (error) {
+      console.error(`Error fetching regular clients: ${error.message}`);
+    }
+  };
+  useEffect(() => {
+    fetchClients();
+  }, []);
   return (
     <div className="display-flex min-h-screen w-full flex-col items-center justify-between  bg-slate-800">
       {/* Statistics Cards */}
@@ -399,9 +417,14 @@ const Home = () => {
               </svg>
             </div>
             <div className="text-sm text-black dark:text-gray-50 mt-2">
-              <div className="bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer"></div>
-              <div className="bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer"></div>
-              <div className="bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer"></div>
+              {clients.map(client => (
+                <div className="bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer">
+                  <p className="w-full text-grey-darkest">
+                    <strong>Id:</strong> {client.idCli} -{" "}
+                    <strong>Nombre:</strong> {client.nombre} -{" "}
+                  </p>
+                </div>
+              ))}
               <Link href="/AllClients">
                 <button
                   className="bg-blue-500 dark:bg-gray-100 text-white active:bg-blue-600 dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none  m-1 ease-linear transition-all duration-150 hover:bg-gray-400"

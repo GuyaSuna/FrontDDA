@@ -76,33 +76,26 @@ const ProductRegister = async (
 ) => {
   try {
     const response = await fetch(`${URL}products`, {
-      method: "POST",
+      method: `POST`,
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        codProd: codProd,
-        nombre: nombre,
-        descripcion: descripcion,
-        precio: precio,
-        cantStock: cantStock,
-        imageUrl: imageUrl,
+        "codProd": codProd,
+        "nombre": nombre,
+        "descripcion": descripcion,
+        "precio": precio,
+        "cantStock": cantStock,
+        "imageUrl": imageUrl,
       }),
     });
 
-    if (response.ok) {
-      const responseBody = await response.json();
-      console.log("Response body:", responseBody);
-
-      if (responseBody.codProd) {
-        console.log("Registro exitoso");
-        return true;
-      } else {
-        console.log("Registro fallido");
-        return false;
-      }
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.status}`);
+    }
+    if (response) {
+      return true;
     } else {
-      console.error("Error en la solicitud:", response.status);
       return false;
     }
   } catch (error) {
