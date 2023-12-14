@@ -36,33 +36,26 @@ const VentaRegister = async (
   cliente
 ) => {
   try {
-    console.log("Cuerpo de la solicitud:", JSON.stringify({
-  nroVenta,
-  productsChecked,
-  totalVenta,
-  fchCompra,
-  seller,
-  cliente,
-}));
+   
     const response = await fetch(`${URL}venta/${cliente}/${seller}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        nroVenta,
-        productsChecked,
-        totalVenta,
-        fchCompra,
-        seller,
-        cliente,
+        "nroVenta" : nroVenta,
+        "listaProductos":productsChecked,
+        "totalVenta" : totalVenta,
+        "cliente" : {},
+        "fchCompra": fchCompra,
+        "vendedor":{}
       }),
     });
 
     if (!response.ok) {
       throw new Error(`Error en la solicitud: ${response.status}`);
     }
-    if (response.authenticated) {
+    if (response) {
       return true;
     } else {
       return false;
@@ -289,6 +282,7 @@ const getClient = (idCli) => {
   });
 };
 const updateClient = async (idCli, nombre, direccion, telefono, fchIngreso) => {
+  console.log(idCli)
   try {
     const response = await fetch(`${URL}clientes`, {
       method: "PUT",
@@ -308,14 +302,17 @@ const updateClient = async (idCli, nombre, direccion, telefono, fchIngreso) => {
   }
 };
 
-const updateProduct = async (updatedProductData) => {
+const updateProduct = async (codProd,updatedProductData) => {
   try {
     const response = await fetch(`${URL}products`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(updatedProductData),
+      body: JSON.stringify({
+        codProd: codProd,
+        ...updatedProductData,
+      }),
     });
 
     if (!response.ok) {
