@@ -57,8 +57,8 @@ const router = useRouter();
 
   
   return (
-    <main className="h-screen flex items-center justify-center bg-gray-900">
-      <form className="mx-auto max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl border p-4 border-gray-500 bg-gray-200 m-72">
+    <main className="h-screen flex items-center  justify-center bg-gray-900">
+      <form className="mx-auto max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl border p-4 border-gray-500 bg-gray-200 m-72 rounded-lg shadow-md">
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
             <h2 className="text-base font-semibold leading-7 text-gray-900">
