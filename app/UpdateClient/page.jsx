@@ -52,7 +52,6 @@ const UpdateClient = () => {
 
   const handleClientUpdate = async (e) => {
     e.preventDefault();
-    console.log(client.idCli);
     try {
       const success = await updateClient(
         client.idCli,
