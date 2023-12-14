@@ -29,23 +29,32 @@ const logIn = async (name, password) => {
 };
 const VentaRegister = async (
   nroVenta,
+  productsChecked,
   totalVenta,
   fchCompra,
-  nroVendedor,
+  seller,
   cliente
 ) => {
   try {
-    const response = await fetch(`${URL}Venta`, {
+    console.log("Cuerpo de la solicitud:", JSON.stringify({
+  nroVenta,
+  productsChecked,
+  totalVenta,
+  fchCompra,
+  seller,
+  cliente,
+}));
+    const response = await fetch(`${URL}venta/${cliente}/${seller}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         nroVenta,
-        productList,
+        productsChecked,
         totalVenta,
         fchCompra,
-        nroVendedor,
+        seller,
         cliente,
       }),
     });

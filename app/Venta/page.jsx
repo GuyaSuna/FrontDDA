@@ -51,8 +51,8 @@ const Venta = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("ABRRRRRRRRRRRRR");
-
+    console.log("ABRRRRRRRRRRRRR", productsChecked);
+  
     try {
       const success = await VentaRegister(
         ventaNumber,
@@ -62,7 +62,7 @@ const Venta = () => {
         seller,
         client
       );
-
+  
       if (success) {
         router.push("/");
       } else {
@@ -72,12 +72,14 @@ const Venta = () => {
       console.error("Error durante el inicio de sesión:", error);
     }
   };
+  
 
   const fetchData = async () => {
     try {
       const data = await getAllProducts();
       console.log("Data:", data);
       setProductList(data);
+      
     } catch (error) {
       console.error(`Error fetching data: ${error.message}`);
     }
@@ -85,10 +87,15 @@ const Venta = () => {
 
   useEffect(() => {
     fetchData();
+   
   }, []);
 
   useEffect(() => {
     console.log(usuario);
+    if(usuario != null){
+      setSeller(usuario.nroVendedor)
+    }
+    
   }, [usuario]);
 
   const handleProductAdd = () => {
@@ -179,7 +186,8 @@ const Venta = () => {
                 <li key={index} className="mb-2">
                   <div className="flex items-center">
                     <div className="bg-blue-500 text-white px-4 py-2 rounded-md mr-4">
-                      {product.nombre}
+                    {product.nombre}
+                    : {product.precio}
                     </div>
                     <button
                       onClick={() => handleDeleteProductSelect(index , product.precio)}
@@ -233,7 +241,7 @@ const Venta = () => {
                   className="mb-2 rounded-md"
                   style={{ width: "100%", height: "100px", objectFit: "cover" }}
                 />
-                <p className="text-lg font-semibold">{product.nombre}</p>
+                <p className="text-lg font-semibold">{product.nombre} {product.precio}</p>
                 <button
                   onClick={() => handleProductSelect(product)}
                   className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md"
