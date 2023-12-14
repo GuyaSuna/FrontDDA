@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { getAllProducts, getProduct } from "../../Api/api";
+import { getAllProducts, getProduct, deleteProduct } from "../../Api/api";
 
 const detailProduct = () => {
   const router = useRouter();
@@ -29,7 +29,7 @@ const detailProduct = () => {
     console.log("Codigo Delete producto:", codProd);
 
     try {
-      const success = deleteProduct(codProd, setMsg, setSucces, setListaProductos);
+      const success = deleteProduct(codProd);
 
       if (success) {
         router.push("/AllProducts");

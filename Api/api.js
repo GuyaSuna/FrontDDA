@@ -349,6 +349,26 @@ const VentaPorCliente = async (id) => {
   }
 };
 
+const deleteProduct = async (id) => {
+  try {
+    const response = await fetch(`${URL}products/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.status}`);
+    }
+    return true;
+  } catch (error) {
+    console.error(`An error has occurred in DeleteProduct: ${error.message}`);
+    return false;
+  }
+};
+
+
+
 export {
   logIn,
   getAllProducts,
@@ -361,5 +381,6 @@ export {
   deleteClient,
   getClient,
   updateClient,
-  updateProduct
+  updateProduct,
+  deleteProduct
 };
