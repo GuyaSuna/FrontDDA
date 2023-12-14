@@ -40,7 +40,12 @@ function LoginPage() {
   return (
     <main
     className="h-screen flex items-center justify-center bg-cover"
-    style={{ backgroundImage: "url('https://img.freepik.com/vector-premium/fondo-abstracto-azul-linea-luz-verde-espacio-blanco_156943-56.jpg')" }}
+    style={{
+      backgroundImage: "url('https://images.unsplash.com/photo-1464618663641-bbdd760ae84a?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Zm9uZG8lMjBkZWwlMjBzaXRpbyUyMHdlYnxlbnwwfHwwfHx8MA%3D%3D')",
+      backgroundSize: "cover", // Agregado para evitar estirar la imagen
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+    }}
   >
       <div className="bg-white p-8 rounded-lg shadow-md w-96 text-gray-800">
         <h1 className="text-3xl font-bold mb-4">Login</h1>
@@ -90,7 +95,7 @@ function LoginPage() {
           <Link
             type="button"
             className="bg-blue-500 ml-10 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
-            href="Clientes"
+            href="VendedorRegister"
           >
             Registrarse
           </Link>
