@@ -1,30 +1,24 @@
 import Link from "next/link";
 import React from "react";
-import Image from 'next/image';
-
+import Image from "next/image";
 
 const Header = () => {
   const links = [
-  {
-    label: "LogIn",
-    route: "./LogIn",
-  },
-  {
-    label: "LogIn",
-    route: "./LogIn",
-  },
+    {
+      label: "LogIn",
+      route: "./LogIn",
+    },
+    {
+      label: "LogIn",
+      route: "./LogIn",
+    },
   ];
   return (
-    <div className="fixed-t w-full flex items-center justify-between h-20 text-black z-10  bg-blue-800 dark:bg-gray-800 border-b-4  dark:border-gray-600">
-      <div className="flex items-center justify-between md:justify-center pl-3 w-14 md:w-64 h-14 bg-blue-800 dark:bg-gray-800 border-none">
-      <Image
-        src="/tricoma-logo.png"
-        alt="Logo"
-        width={500}
-        height={300}
-      />
+    <div className="fixed-t w-full flex items-center justify-between h-20 text-black z-10  bg-blue-800 bg-gray-800 border-b-4  border-gray-600">
+      <div className="flex items-center justify-between md:justify-center pl-3 w-14 md:w-64 h-14 bg-blue-800 bg-gray-800 border-none">
+        <Image src="/tricoma-logo.png" alt="Logo" width={500} height={300} />
       </div>
-      <div className="flex justify-between items-center h-14 bg-blue-800 dark:bg-gray-800 header-right">
+      <div className="flex justify-between items-center h-14 bg-blue-800 bg-gray-800 header-right">
         <div className="bg-white rounded flex items-center w-full max-w-xs m-12 p-2 shadow-sm border border-gray-200">
           <button className="outline-none focus:outline-none">
             <svg
@@ -49,7 +43,7 @@ const Header = () => {
         </div>
         <ul className="flex items-center">
           <li>
-            <div className="block w-px h-6 mx-3 bg-gray-400 dark:bg-gray-700" />
+            <div className="block w-px h-6 mx-3 bg-gray-400 bg-gray-700" />
           </li>
           <li>
             <Link
@@ -75,7 +69,6 @@ const Header = () => {
               Login
             </Link>
           </li>
-          
         </ul>
       </div>
     </div>

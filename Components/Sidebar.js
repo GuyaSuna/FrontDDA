@@ -22,10 +22,10 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="flex flex-col h-full p-3 w-72 dark:bg-gray-900 dark:text-gray-100 justify-between">
+    <div className="flex flex-col h-full p-3 w-72 bg-gray-900 dark:text-gray-100 justify-between">
       <ul className="flex flex-col space-y-1 w-full md:w-full">
         <li className="mb-10">
-          <div className="flex items-center  justify-center md:justify-center md:w-full   bg-blue-900 dark:bg-gray-900 border-none">
+          <div className="flex items-center  justify-center md:justify-center md:w-full   bg-blue-900 bg-gray-900 border-none">
             <img
               className="w-14 h-14 md:w-24 md:h-24 mr-2 rounded-full overflow-hidden mt-10"
               src="https://media.licdn.com/dms/image/C5603AQG2FNXYCpKj2Q/profile-displayphoto-shrink_400_400/0/1619473078862?e=2147483647&v=beta&t=eG8gjOGxMvUFFwggd7aY-jDXQCbJIBPzv-I42FJ9QdU"
@@ -89,7 +89,7 @@ const Sidebar = () => {
               Clientes
             </span>
           </Link>
-        </li>        
+        </li>
         <li>
           <Link
             href="/AllProducts"

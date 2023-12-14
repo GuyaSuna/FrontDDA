@@ -1,11 +1,15 @@
-'use client'
+"use client";
 import React, { use, useState } from "react";
-import { getProductStockMenor, getProductClient, getVentaPerDate } from "../../Api/api"; 
+import {
+  getProductStockMenor,
+  getProductClient,
+  getVentaPerDate,
+} from "../../Api/api";
 
 const StatsPage = () => {
   const [selectedOption, setSelectedOption] = useState("option1");
   const [inputValue, setInputValue] = useState("");
-  const [inputDateValue , setInputDateValue] = useState();
+  const [inputDateValue, setInputDateValue] = useState("");
   const [cantCompras, setCantCompras] = useState(0);
   const [data, setData] = useState([]);
 
@@ -17,35 +21,34 @@ const StatsPage = () => {
     setInputValue(e.target.value);
   };
   const handleInputDateChange = (e) => {
+    setInputDateValue(e.target.value);
     setInputValue(e.target.value);
   };
 
   const handleFetchData = async () => {
-       let result = [];
-      switch (selectedOption) {
-        case "option1":
-          result = await getProductStockMenor(parseInt(inputValue));
-          setData(result.data);
-          break;
-         case "option2":
-           result = await getProductClient(parseInt(inputValue));
-           setCantCompras(result)
-         break;
-         case "option3":
-           result = await getVentaPerDate(inputDateValue);
-           setData(result.data);
-           break;
-        default:
-          break;
-      }
+    let result = [];
+    switch (selectedOption) {
+      case "option1":
+        result = await getProductStockMenor(parseInt(inputValue));
+        setData(result.data);
+        break;
+      case "option2":
+        result = await getProductClient(parseInt(inputValue));
+        setCantCompras(result);
+        break;
+      case "option3":
+        result = await getVentaPerDate(inputDateValue);
+        setData(result.data);
+        break;
+      default:
+        break;
+    }
 
-      console.log(result);
-      
-   
-  }
-  
+    console.log(result);
+  };
+
   return (
-    <div className="container mx-auto mt-8 bg-gray-200 p-4 rounded">
+    <div className="container mx-auto mt-8 bg-white p-4 rounded">
       <h1 className="text-3xl font-semibold mb-4">Estadísticas</h1>
 
       <div className="flex space-x-4">
@@ -85,64 +88,76 @@ const StatsPage = () => {
             {selectedOption === "option2" && "ID del cliente:"}
             {selectedOption === "option3" && "Fecha (YYYY-MM-DD):"}
           </label>
-         
+
           <input
             type="text"
             value={inputValue}
             onChange={handleInputChange}
-            className="border rounded p-2"
+            className="border-2 border-black rounded  p-2"
           />
-        
 
           {selectedOption == "option3" && (
-          <input
-            type="date"
-            value={inputValue}
-            onChange={handleInputDateChange}
-            className="border rounded p-2"
-          />
+            <input
+              type="date"
+              value={inputValue}
+              onChange={handleInputDateChange}
+              className="border rounded p-2"
+            />
           )}
-          
-         
-          
         </div>
 
-        <button onClick={handleFetchData} className="mt-2 bg-blue-500 text-white p-2 rounded">
+        <button
+          onClick={handleFetchData}
+          className="mt-2 bg-gray-800 text-white p-2 rounded"
+        >
           Obtener Datos
         </button>
 
         {selectedOption === "option1" && (
-        <div className="mt-4">
-          <h2 className="text-xl font-semibold mb-2">Resultados:</h2>
-          <ul>
-          {data && Array.isArray(data) ? (
-            data.map((item, index) => (
-              <li key={index}>Producto:{item.nombre}  ---  Precio : {item.precio}  ---   Cantidad : {item.cantStock}</li>
-               ))
+          <div className="mt-4">
+            <h2 className="text-xl font-semibold mb-2">Resultados:</h2>
+            <ul>
+              {data && Array.isArray(data) ? (
+                data.map((item, index) => (
+                  <li key={index}>
+                    Producto:{item.nombre} --- Precio : {item.precio} ---
+                    Cantidad : {item.cantStock}
+                  </li>
+                ))
               ) : (
                 <p>No hay datos disponibles.</p>
-          )}
-          </ul>
-        </div>
+              )}
+            </ul>
+          </div>
         )}
 
-        {selectedOption === "option2" && ( 
-
-        <li>La cantidad de compras que ha realizado este cliente son: {cantCompras}</li>
+        {selectedOption === "option2" && (
+          <li>
+            La cantidad de compras que ha realizado este cliente son:{" "}
+            {cantCompras}
+          </li>
         )}
 
-
-
-
-      {selectedOption === "option3" && ( 
-
-      <li>La cantidad de compras que ha realizado este cliente son: {cantCompras}</li>
-      )}
+        {selectedOption === "option3" && (
+          <div className="mt-4">
+            <h2 className="text-xl font-semibold mb-2">Resultados:</h2>
+            <ul>
+              {data && Array.isArray(data) ? (
+                data.map((item, index) => (
+                  <li key={index}>
+                    Producto:{item.nroVenta} --- Total Venta : {item.totalVenta}{" "}
+                    --- Fecha Venta : {item.fchCompra}
+                  </li>
+                ))
+              ) : (
+                <p>No hay datos disponibles.</p>
+              )}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
-
 };
 
-  export default StatsPage;
-
+export default StatsPage;

@@ -40,7 +40,7 @@ const Home = () => {
               </div>
               <div className="relative w-full max-w-full flex-grow flex-1 text-right">
                 <Link
-                  className="bg-blue-500 dark:bg-gray-100 text-white active:bg-blue-600 dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 hover:bg-gray-400"
+                  className="bg-gray-800 text-white active:bg-blue-600 text-gray-800 active:text-gray-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 hover:bg-gray-200"
                   type="button"
                   href="/AllProducts"
                 >
@@ -400,7 +400,7 @@ const Home = () => {
         {/* ./Recent Activities */}
       </div>
       {/* Task Summaries */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 p-4 gap-4 text-black dark:text-white">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 p-4 gap-4 text-black text-white">
         <div className="md:col-span-2 xl:col-span-3">
           <h3 className="text-lg font-semibold">Registro de datos</h3>
         </div>
@@ -417,7 +417,7 @@ const Home = () => {
               </svg>
             </div>
             <div className="text-sm text-black dark:text-gray-50 mt-2">
-              {clients.map(client => (
+              {clients.map((client) => (
                 <div className="bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer">
                   <p className="w-full text-grey-darkest">
                     <strong>Id:</strong> {client.idCli} -{" "}
@@ -427,7 +427,7 @@ const Home = () => {
               ))}
               <Link href="/AllClients">
                 <button
-                  className="bg-blue-500 dark:bg-gray-100 text-white active:bg-blue-600 dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none  m-1 ease-linear transition-all duration-150 hover:bg-gray-400"
+                  className="bg-gray-800 text-white active:bg-blue-600 dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none  m-1 ease-linear transition-all duration-150 hover:bg-gray-400"
                   type="button"
                 >
                   Ver todos
@@ -453,7 +453,7 @@ const Home = () => {
               <div className="bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer"></div>
               <div className="bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded mt-1 border-b border-gray-100 dark:border-gray-900 cursor-pointer"></div>
               <button
-                className="bg-blue-500 dark:bg-gray-100 text-white active:bg-blue-600 dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none  m-1 ease-linear transition-all duration-150 hover:bg-gray-400"
+                className="bg-gray-800 text-white active:bg-blue-600 dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none  m-1 ease-linear transition-all duration-150 hover:bg-gray-400"
                 type="button"
               >
                 Ver todos

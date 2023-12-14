@@ -1,9 +1,9 @@
 import React from "react";
-import Image from 'next/image';
+import Image from "next/image";
 
 const Footer = () => {
   return (
-    <footer className="w-full text-white  bg-blue-900 dark:bg-gray-900 body-font">
+    <footer className="w-full text-white  bg-blue-900 bg-gray-800 body-font">
       <div className="container flex flex-col flex-wrap px-5 py-24 mx-auto md:items-center lg:items-start md:flex-row md:flex-no-wrap">
         <div className="flex-shrink-0 w-64 mx-auto text-center md:mx-0 md:text-left">
           <Image src="/tricoma-logo.png" alt="Logo" width={500} height={300} />
