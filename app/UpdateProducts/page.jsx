@@ -62,7 +62,6 @@ const updateProducts = () => {
 
       useEffect(() => {
         setCodProd(sessionStorage.getItem('codProd'));
-         console.log('Código del producto:', codProd);
        }, []);
      
      

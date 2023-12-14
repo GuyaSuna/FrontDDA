@@ -3,8 +3,10 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import { VentaRegister, getAllProducts } from "../../Api/api";
 import { useUsuario } from "../../Context/userContext";
+import { useRouter } from "next/navigation";
 
 const Venta = () => {
+  const router = useRouter()
   const { usuario } = useUsuario();
 
   const [ventaNumber, setVentaNumber] = useState("");
@@ -155,7 +157,7 @@ const Venta = () => {
               Purchase Date
             </label>
             <input
-              type="text"
+              type="date"
               className="form-input mt-1 block w-full px-4 py-2 border rounded-md bg-white focus:outline-none focus:border-blue-500"
               value={purchaseDate}
               onChange={(e) => setPurchaseDate(e.target.value)}
