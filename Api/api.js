@@ -423,6 +423,51 @@ const getProductStockMenor = (cantStock) => {
   });
 };
 
+const getProductClient = (idCli) => {
+  console.log("ke " + idCli)
+  return new Promise((resolve, reject) => {
+    fetch(`${URL}venta/client/${idCli}`, {
+      method: `GET`,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          const errorMessage = `La solicitud falló con código: ${response.status}`;
+          reject(errorMessage);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        resolve(data);
+      })
+      .catch((error) => {
+        console.log("Error en getProductClient:", error);
+        reject(error.message || "Error desconocido");
+      });
+  });
+};
+
+const getVentaPerDate = (fecha) => {
+  console.log("Para pensar" + fecha)
+  return new Promise((resolve, reject) => {
+    fetch(`${URL}venta/fecha/${fecha}`, {
+      method: `GET`,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          const errorMessage = `La solicitud falló con código: ${response.status}`;
+          reject(errorMessage);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        resolve(data);
+      })
+      .catch((error) => {
+        reject(error.message || "Error desconocido");
+      });
+  });
+};
+
 
 
 export {
@@ -440,5 +485,7 @@ export {
   updateProduct,
   deleteProduct,
   RegisterVendedor,
-  getProductStockMenor
+  getProductStockMenor,
+  getProductClient,
+  getVentaPerDate
 };
