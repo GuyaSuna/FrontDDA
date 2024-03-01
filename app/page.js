@@ -25,11 +25,11 @@ const Home = () => {
   }, []);
   return (
     <div className="display-flex min-h-screen w-full flex-col items-center justify-between  bg-slate-800">
-      {/* Statistics Cards */}
+
       <CardsStatistics />
-      {/* ./Statistics Cards */}
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 p-4 gap-4">
-        {/* Social Traffic */}
+
         <div className="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded">
           <div className="rounded-t mb-0 px-0 border-0">
             <div className="flex flex-wrap items-center px-4 py-2">
